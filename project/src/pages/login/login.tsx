@@ -1,5 +1,5 @@
 import HeaderLeft from '../../components/header-left/header-left';
-import {Helmet} from "react-helmet-async";
+import { Helmet } from 'react-helmet-async';
 
 function Login(): JSX.Element {
   return (

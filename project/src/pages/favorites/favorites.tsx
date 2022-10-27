@@ -1,6 +1,6 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import {Helmet} from "react-helmet-async";
+import { Helmet } from 'react-helmet-async';
 
 function Favorites(): JSX.Element {
   return (
