@@ -1,12 +1,17 @@
-import PlaceCard from '../../components/place-card/place-card';
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
+import { Offer } from '../../types/offer';
+import OfferList from '../../components/offers-list/offers-list';
+import { useState } from 'react';
 
 type MainProps = {
   placeCardCount: number;
+  offers: Offer[];
 };
 
-function Main({ placeCardCount }: MainProps): JSX.Element {
+function Main({ placeCardCount, offers }: MainProps): JSX.Element {
+  const [currentActiveCard, setActiveCard] = useState(0);
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -79,16 +84,10 @@ function Main({ placeCardCount }: MainProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-              </div>
+              <OfferList offers={offers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">{currentActiveCard}</section>
             </div>
           </div>
         </div>

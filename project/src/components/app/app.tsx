@@ -7,23 +7,28 @@ import Room from '../../pages/room/room';
 import PrivateRoute from '../../pages/private-route/private-route';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { HelmetProvider } from 'react-helmet-async';
+import { Offer } from '../../types/offer';
 
 type AppProps = {
   placeCardCount: number;
+  offers: Offer[];
 };
 
-function App({ placeCardCount }: AppProps): JSX.Element {
+function App({ placeCardCount, offers }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Main} element={<Main placeCardCount={placeCardCount} />} />
+          <Route
+            path={AppRoute.Main}
+            element={<Main placeCardCount={placeCardCount} offers={offers} />}
+          />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                <Favorites />
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <Favorites offers={offers} />
               </PrivateRoute>
             }
           />
