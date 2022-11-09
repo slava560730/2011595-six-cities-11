@@ -4,14 +4,14 @@ import PlaceCard from '../place-card/place-card';
 
 type OfferListProps = {
   offers: Offer[];
-  setActiveCard: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedOffer: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function OfferList({ offers, setActiveCard }: OfferListProps): JSX.Element {
+function OfferList({ offers, setSelectedOffer }: OfferListProps): JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <PlaceCard setActiveCard={setActiveCard} key={offer.id} offer={offer} />
+        <PlaceCard setSelectedOffer={setSelectedOffer} key={offer.id} offer={offer} />
       ))}
     </div>
   );

@@ -1,16 +1,17 @@
+import React, { useState } from 'react';
 import { NewReview } from '../../types/review';
-import { useState } from 'react';
 
 function AddReviewForm(): JSX.Element {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<NewReview>({
     comment: '',
     rating: 0,
   });
 
-  const fieldChangeHandle = (evt: {
-    target: { value: NewReview[keyof NewReview]; name: string };
-  }) => {
-    const { name, value } = evt.target;
+  const { comment } = formData;
+  const fieldChangeHandle = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = target;
     setFormData({ ...formData, [name]: value });
   };
 
@@ -104,7 +105,7 @@ function AddReviewForm(): JSX.Element {
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={fieldChangeHandle}
-        value={formData.comment}
+        value={comment}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

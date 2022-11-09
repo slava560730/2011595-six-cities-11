@@ -1,17 +1,18 @@
 import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import cn from 'classnames';
 
 type PlaceCardProps = {
   offer: Offer;
-  setActiveCard: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedOffer: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function PlaceCard({ offer, setActiveCard }: PlaceCardProps): JSX.Element {
+function PlaceCard({ offer, setSelectedOffer }: PlaceCardProps): JSX.Element {
   return (
     <article
       onMouseOver={() => {
-        setActiveCard(offer.id);
+        setSelectedOffer(offer.id);
       }}
       className="cities__card place-card"
     >
@@ -38,11 +39,14 @@ function PlaceCard({ offer, setActiveCard }: PlaceCardProps): JSX.Element {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className={`${
-              offer.isFavorite ? 'place-card__bookmark-button--active' : ''
-            } place-card__bookmark-button button`}
+            className={cn('place-card__bookmark-button button', {
+              'place-card__bookmark-button--active': offer.isFavorite,
+            })}
             type="button"
           >
+            {/*  `${*/}
+            {/*  offer.isFavorite ? 'place-card__bookmark-button--active' : ''*/}
+            {/*} place-card__bookmark-button button`*/}
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
