@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Marker } from 'leaflet';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../consts';
+import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../consts';
 import 'leaflet/dist/leaflet.css';
 import { City, Offer } from '../../types/offer';
 import useMap from '../../hooks/useMap/useMap';
@@ -8,6 +8,7 @@ import useMap from '../../hooks/useMap/useMap';
 type MapProps = {
   city: City;
   offers: Offer[];
+  classNameMap: string;
   selectedOffer: number | undefined;
 };
 
@@ -23,7 +24,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40],
 });
 
-function Map({ city, offers, selectedOffer }: MapProps): JSX.Element {
+function Map({ city, offers, selectedOffer, classNameMap }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -46,7 +47,8 @@ function Map({ city, offers, selectedOffer }: MapProps): JSX.Element {
     }
   }, [map, offers, selectedOffer]);
 
-  return <div style={{ height: '751px', width: '512px' }} ref={mapRef}></div>;
+
+  return <div className={classNameMap} ref={mapRef}></div>;
 }
 
 export default Map;
