@@ -14,7 +14,7 @@ export enum AppRoute {
 }
 
 export enum ClassNameMap {
-  Main =  'cities__leaflet',
+  Main = 'cities__leaflet',
   Room = 'property__leaflet',
 }
 
