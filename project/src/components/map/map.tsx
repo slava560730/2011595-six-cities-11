@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Marker } from 'leaflet';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../consts';
+import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../consts';
 import 'leaflet/dist/leaflet.css';
 import { City, Offer } from '../../types/offer';
 import useMap from '../../hooks/useMap/useMap';
@@ -46,7 +46,6 @@ function Map({ city, offers, selectedOffer, classNameMap }: MapProps): JSX.Eleme
       });
     }
   }, [map, offers, selectedOffer]);
-
 
   return <div className={classNameMap} ref={mapRef}></div>;
 }

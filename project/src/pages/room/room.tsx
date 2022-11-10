@@ -2,13 +2,13 @@ import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import { Offer } from '../../types/offer';
 import Map from '../../components/map/map';
-import {city, ClassNameMap, OPTION_SINGLE} from '../../consts';
+import { city, ClassNameMap, OPTION_SINGLE } from '../../consts';
 import React, { useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import PlaceCard from '../../components/place-card/place-card';
-import {Review} from "../../types/review";
-import PropertyReviews from "../../components/property-reviews/property-reviews";
-import cn from "classnames";
+import { Review } from '../../types/review';
+import PropertyReviews from '../../components/property-reviews/property-reviews';
+import cn from 'classnames';
 
 type RoomProps = {
   offers: Offer[];
@@ -66,9 +66,7 @@ function Room({ offers, reviews }: RoomProps): JSX.Element {
                 </div>
               )}
               <div className="property__name-wrapper">
-                <h1 className="property__name">
-                  {title}
-                </h1>
+                <h1 className="property__name">{title}</h1>
                 <button
                   className={cn('property__bookmark-button button', {
                     'property__bookmark-button--active': isFavorite,
@@ -90,8 +88,13 @@ function Room({ offers, reviews }: RoomProps): JSX.Element {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">{type}</li>
-                <li className="property__feature property__feature--bedrooms">{bedrooms}{bedrooms === OPTION_SINGLE ? ' Bedroom': ' Bedrooms'}</li>
-                <li className="property__feature property__feature--adults">Max {maxAdults} {maxAdults === OPTION_SINGLE ? ' Adult': ' Adults'}</li>
+                <li className="property__feature property__feature--bedrooms">
+                  {bedrooms}
+                  {bedrooms === OPTION_SINGLE ? ' Bedroom' : ' Bedrooms'}
+                </li>
+                <li className="property__feature property__feature--adults">
+                  Max {maxAdults} {maxAdults === OPTION_SINGLE ? ' Adult' : ' Adults'}
+                </li>
               </ul>
               <div className="property__price">
                 <b className="property__price-value">&euro;{price}</b>
@@ -121,12 +124,10 @@ function Room({ offers, reviews }: RoomProps): JSX.Element {
                   <span className="property__user-status">{isPro && 'Pro'}</span>
                 </div>
                 <div className="property__description">
-                  <p className="property__text">
-                    {description}
-                  </p>
+                  <p className="property__text">{description}</p>
                 </div>
               </div>
-<PropertyReviews reviews={reviews} />
+              <PropertyReviews reviews={reviews} />
             </div>
           </div>
           <section className="property__map map">

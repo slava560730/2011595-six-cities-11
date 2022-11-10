@@ -1,11 +1,18 @@
-import {Review} from "../../types/review";
-import React from "react";
+import { Review } from '../../types/review';
+import React from 'react';
 
 type PropertyReviewItemProps = {
   review: Review;
 };
 
-function PropertyReviewItem({ review:{rating, date, user:{avatarUrl, name}, comment} }: PropertyReviewItemProps): JSX.Element {
+function PropertyReviewItem({
+  review: {
+    rating,
+    date,
+    user: { avatarUrl, name },
+    comment,
+  },
+}: PropertyReviewItemProps): JSX.Element {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -27,13 +34,10 @@ function PropertyReviewItem({ review:{rating, date, user:{avatarUrl, name}, comm
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <p className="reviews__text">
-          {comment}
-        </p>
-        <time className="reviews__time" dateTime={date}
-        >{date}
-        </time
-        >
+        <p className="reviews__text">{comment}</p>
+        <time className="reviews__time" dateTime={date}>
+          {date}
+        </time>
       </div>
     </li>
   );
