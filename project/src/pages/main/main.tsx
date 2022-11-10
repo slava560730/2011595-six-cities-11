@@ -1,16 +1,26 @@
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import { Offer } from '../../types/offer';
+import { City, Offer } from '../../types/offer';
 import OfferList from '../../components/offers-list/offers-list';
 import { useState } from 'react';
+import Map from '../../components/map/map';
 
 type MainProps = {
   placeCardCount: number;
   offers: Offer[];
 };
 
+const city: City = {
+  name: 'Amsterdam',
+  location: {
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
+    zoom: 13,
+  },
+};
+
 function Main({ placeCardCount, offers }: MainProps): JSX.Element {
-  const [currentActiveCard, setActiveCard] = useState(0);
+  const [selectedOffer, setSelectedOffer] = useState(500);
 
   return (
     <div className="page page--gray page--main">
@@ -84,10 +94,12 @@ function Main({ placeCardCount, offers }: MainProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <OfferList offers={offers} setActiveCard={setActiveCard} />
+              <OfferList offers={offers} setSelectedOffer={setSelectedOffer} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">{currentActiveCard}</section>
+              <section className="cities__map map">
+                <Map city={city} offers={offers} selectedOffer={selectedOffer}></Map>
+              </section>
             </div>
           </div>
         </div>
