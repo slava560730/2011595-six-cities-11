@@ -4,7 +4,7 @@ import { Offer } from '../../types/offer';
 import OfferList from '../../components/offers-list/offers-list';
 import { useState } from 'react';
 import Map from '../../components/map/map';
-import {city, ClassNameMap} from "../../consts";
+import { city, ClassNameMap } from '../../consts';
 
 type MainProps = {
   placeCardCount: number;
@@ -90,7 +90,12 @@ function Main({ placeCardCount, offers }: MainProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} offers={offers} selectedOffer={selectedOffer} classNameMap={ClassNameMap.Main}></Map>
+                <Map
+                  city={city}
+                  offers={offers}
+                  selectedOffer={selectedOffer}
+                  classNameMap={ClassNameMap.Main}
+                ></Map>
               </section>
             </div>
           </div>

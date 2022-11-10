@@ -52,7 +52,7 @@ function Room({ offers, reviews }: RoomProps): JSX.Element {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {images.map((img) => (
-                <div className="property__image-wrapper">
+                <div className="property__image-wrapper" key={img} >
                   <img className="property__image" src={img} alt={description} />
                 </div>
               ))}
@@ -104,7 +104,7 @@ function Room({ offers, reviews }: RoomProps): JSX.Element {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   {goods.map((good) => (
-                    <li className="property__inside-item">{good}</li>
+                    <li className="property__inside-item" key={good}>{good}</li>
                   ))}
                 </ul>
               </div>
@@ -136,7 +136,7 @@ function Room({ offers, reviews }: RoomProps): JSX.Element {
               offers={offers}
               selectedOffer={selectedOffer}
               classNameMap={ClassNameMap.Room}
-            ></Map>
+            />
           </section>
         </section>
         <div className="container">
