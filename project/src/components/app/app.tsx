@@ -12,8 +12,8 @@ import { Review } from '../../types/review';
 
 type AppProps = {
   placeCardCount: number;
-  offers: Offer[];
   reviews: Review[];
+  offers: Offer[];
 };
 
 function App({ placeCardCount, offers, reviews }: AppProps): JSX.Element {
