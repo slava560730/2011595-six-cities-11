@@ -95,7 +95,7 @@ function Main({ placeCardCount, offers }: MainProps): JSX.Element {
                   offers={offers}
                   selectedOffer={selectedOffer}
                   classNameMap={ClassNameMap.Main}
-                ></Map>
+                />
               </section>
             </div>
           </div>
