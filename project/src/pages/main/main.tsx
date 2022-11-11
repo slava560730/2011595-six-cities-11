@@ -1,22 +1,14 @@
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import { City, Offer } from '../../types/offer';
+import { Offer } from '../../types/offer';
 import OfferList from '../../components/offers-list/offers-list';
 import { useState } from 'react';
 import Map from '../../components/map/map';
+import { city, ClassNameMap } from '../../consts';
 
 type MainProps = {
   placeCardCount: number;
   offers: Offer[];
-};
-
-const city: City = {
-  name: 'Amsterdam',
-  location: {
-    latitude: 52.3909553943508,
-    longitude: 4.85309666406198,
-    zoom: 13,
-  },
 };
 
 function Main({ placeCardCount, offers }: MainProps): JSX.Element {
@@ -98,7 +90,12 @@ function Main({ placeCardCount, offers }: MainProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} offers={offers} selectedOffer={selectedOffer}></Map>
+                <Map
+                  city={city}
+                  offers={offers}
+                  selectedOffer={selectedOffer}
+                  classNameMap={ClassNameMap.Main}
+                />
               </section>
             </div>
           </div>

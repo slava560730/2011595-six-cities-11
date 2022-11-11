@@ -8,13 +8,15 @@ import PrivateRoute from '../../pages/private-route/private-route';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { HelmetProvider } from 'react-helmet-async';
 import { Offer } from '../../types/offer';
+import { Review } from '../../types/review';
 
 type AppProps = {
   placeCardCount: number;
+  reviews: Review[];
   offers: Offer[];
 };
 
-function App({ placeCardCount, offers }: AppProps): JSX.Element {
+function App({ placeCardCount, offers, reviews }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -32,7 +34,7 @@ function App({ placeCardCount, offers }: AppProps): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Room} element={<Room />} />
+          <Route path={AppRoute.Room} element={<Room offers={offers} reviews={reviews} />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Routes>
       </BrowserRouter>
