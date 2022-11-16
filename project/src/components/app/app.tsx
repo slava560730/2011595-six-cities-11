@@ -11,20 +11,16 @@ import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 
 type AppProps = {
-  placeCardCount: number;
   reviews: Review[];
   offers: Offer[];
 };
 
-function App({ placeCardCount, offers, reviews }: AppProps): JSX.Element {
+function App({ offers, reviews }: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route
-            path={AppRoute.Main}
-            element={<Main placeCardCount={placeCardCount} offers={offers} />}
-          />
+          <Route path={AppRoute.Main} element={<Main />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route
             path={AppRoute.Favorites}
@@ -34,7 +30,7 @@ function App({ placeCardCount, offers, reviews }: AppProps): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Room} element={<Room offers={offers} reviews={reviews} />} />
+          <Route path={AppRoute.Room} element={<Room reviews={reviews} />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Routes>
       </BrowserRouter>
