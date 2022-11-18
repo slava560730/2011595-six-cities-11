@@ -2,6 +2,7 @@ import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import cn from 'classnames';
+import { NULL_CITY_ID } from '../../consts';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -16,6 +17,9 @@ function PlaceCard({
     <article
       onMouseOver={() => {
         setSelectedOffer(id);
+      }}
+      onMouseLeave={() => {
+        setSelectedOffer(NULL_CITY_ID);
       }}
       className="cities__card place-card"
     >

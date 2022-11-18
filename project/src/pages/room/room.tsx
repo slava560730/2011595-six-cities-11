@@ -1,28 +1,30 @@
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-import { Offer } from '../../types/offer';
 import Map from '../../components/map/map';
-import { city, ClassNameMap, OPTION_SINGLE } from '../../consts';
+import { ClassNameMap, OPTION_SINGLE } from '../../consts';
 import React, { useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PlaceCard from '../../components/place-card/place-card';
 import { Review } from '../../types/review';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
 import cn from 'classnames';
+import { useAppSelector } from '../../hooks';
+import { offers } from '../../mocks/offers';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type RoomProps = {
-  offers: Offer[];
   reviews: Review[];
 };
 
-function Room({ offers, reviews }: RoomProps): JSX.Element {
+function Room({ reviews }: RoomProps): JSX.Element {
+  const offersByCity = useAppSelector((state) => state.offersByCity);
   const params = useParams();
   const id = Number(params.id);
   const [selectedOffer, setSelectedOffer] = useState(id);
-  const currentOffer = offers.find((offer) => offer.id === id);
+  const currentOffer = offersByCity.find((offer) => offer.id === id);
 
   if (!currentOffer) {
-    return <Navigate replace to="/" />;
+    return <NotFoundScreen />;
   }
 
   const {
@@ -133,12 +135,7 @@ function Room({ offers, reviews }: RoomProps): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map
-              city={city}
-              offers={offers}
-              selectedOffer={selectedOffer}
-              classNameMap={ClassNameMap.Room}
-            />
+            <Map selectedOffer={selectedOffer} classNameMap={ClassNameMap.Room} />
           </section>
         </section>
         <div className="container">

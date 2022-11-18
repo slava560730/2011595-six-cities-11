@@ -3,10 +3,10 @@ import { Offer } from '../types/offer';
 export const offers: Offer[] = [
   {
     city: {
-      name: 'Amsterdam',
+      name: 'Paris',
       location: {
-        latitude: 52.3909553943508,
-        longitude: 4.85309666406198,
+        latitude: 48.85661,
+        longitude: 2.351499,
         zoom: 13,
       },
     },
@@ -34,18 +34,18 @@ export const offers: Offer[] = [
     description:
       'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.834610000000005,
+      longitude: 2.335499,
       zoom: 16,
     },
-    id: 1,
+    id: 74,
   },
   {
     city: {
       name: 'Brussels',
       location: {
-        latitude: 52.3609553943508,
-        longitude: 4.85309666406198,
+        latitude: 50.846557,
+        longitude: 4.351697,
         zoom: 13,
       },
     },
@@ -74,18 +74,18 @@ export const offers: Offer[] = [
     description:
       'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
     location: {
-      latitude: 52.3609553943508,
-      longitude: 4.85309666406198,
+      latitude: 50.839557,
+      longitude: 4.346697,
       zoom: 16,
     },
     id: 2,
   },
   {
     city: {
-      name: 'Brussels',
+      name: 'Hamburg',
       location: {
-        latitude: 52.3909553943508,
-        longitude: 4.929309666406198,
+        latitude: 53.550341,
+        longitude: 10.000654,
         zoom: 13,
       },
     },
@@ -115,18 +115,18 @@ export const offers: Offer[] = [
     description:
       'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.929309666406198,
+      latitude: 53.540341000000005,
+      longitude: 10.025654000000001,
       zoom: 16,
     },
     id: 3,
   },
   {
     city: {
-      name: 'Cologne',
+      name: 'Dusseldorf',
       location: {
-        latitude: 52.3809553943508,
-        longitude: 4.939309666406198,
+        latitude: 51.225402,
+        longitude: 6.776314,
         zoom: 13,
       },
     },
@@ -153,10 +153,86 @@ export const offers: Offer[] = [
     description:
       'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
     location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406198,
+      latitude: 51.216402,
+      longitude: 6.758314,
       zoom: 16,
     },
     id: 4,
+  },
+  {
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13,
+      },
+    },
+    previewImage: 'https://11.react.pages.academy/static/hotel/17.jpg',
+    images: [
+      'https://11.react.pages.academy/static/hotel/5.jpg',
+      'https://11.react.pages.academy/static/hotel/16.jpg',
+    ],
+    title: 'Beautiful & luxurious apartment at great location',
+    isFavorite: false,
+    isPremium: true,
+    rating: 3.5,
+    type: 'house',
+    bedrooms: 2,
+    maxAdults: 7,
+    price: 349,
+    goods: ['Dishwasher', 'Wi-Fi', 'Washing machine', 'Heating'],
+    host: {
+      id: 25,
+      name: 'Angelina',
+      isPro: true,
+      avatarUrl: 'img/avatar-angelina.jpg',
+    },
+    description:
+      'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
+    location: {
+      latitude: 52.36354,
+      longitude: 4.889976,
+      zoom: 16,
+    },
+    id: 5,
+  },
+  {
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13,
+      },
+    },
+    previewImage: 'https://11.react.pages.academy/static/hotel/17.jpg',
+    images: [
+      'https://11.react.pages.academy/static/hotel/5.jpg',
+      'https://11.react.pages.academy/static/hotel/16.jpg',
+    ],
+    title: 'Beautiful & luxurious apartment at great location',
+    isFavorite: false,
+    isPremium: true,
+    rating: 3.5,
+    type: 'house',
+    bedrooms: 2,
+    maxAdults: 7,
+    price: 349,
+    goods: ['Dishwasher', 'Wi-Fi', 'Washing machine', 'Heating'],
+    host: {
+      id: 25,
+      name: 'Angelina',
+      isPro: true,
+      avatarUrl: 'img/avatar-angelina.jpg',
+    },
+    description:
+      'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
+    location: {
+      latitude: 48.834610000000005,
+      longitude: 2.364499,
+      zoom: 16,
+    },
+    id: 6,
   },
 ];
