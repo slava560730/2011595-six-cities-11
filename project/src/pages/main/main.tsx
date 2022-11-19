@@ -7,8 +7,8 @@ import { ClassNameMap, NULL_CITY_ID } from '../../consts';
 import { useAppSelector } from '../../hooks';
 import CityList from '../../components/city-list/city-list';
 import SortForm from '../../components/sort-form/sort-form';
-import MainEmpty from "../../components/main-empty/main-empty";
-import cn from "classnames";
+import MainEmpty from '../../components/main-empty/main-empty';
+import cn from 'classnames';
 
 function Main(): JSX.Element {
   const city = useAppSelector((state) => state.city);
@@ -22,8 +22,11 @@ function Main(): JSX.Element {
         <title>6 cities</title>
       </Helmet>
       <Header />
-      <main className={cn('page__main page__main--index',
-        {'page__main--index-empty': offersByCity.length === 0})}>
+      <main
+        className={cn('page__main page__main--index', {
+          'page__main--index-empty': offersByCity.length === 0,
+        })}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -31,29 +34,24 @@ function Main(): JSX.Element {
           </section>
         </div>
         <div className="cities">
-              {offersByCity.length !== 0 ? (
-                <>
-                  <div className="cities__places-container container">
-                    <section className="cities__places places">
-                      <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">
-                    {offersByCity.length} places to stay in {city}
-                  </b>
-                  <SortForm />
-                  <OfferList setSelectedOffer={setSelectedOffer} />
+          {offersByCity.length !== 0 ? (
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">
+                  {offersByCity.length} places to stay in {city}
+                </b>
+                <SortForm />
+                <OfferList setSelectedOffer={setSelectedOffer} />
+              </section>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  {offersByCity.length !== 0 && (
+                    <Map selectedOffer={selectedOffer} classNameMap={ClassNameMap.Main} />
+                  )}
                 </section>
-                <div className="cities__right-section">
-                    <section className="cities__map map">
-                      {offersByCity.length !== 0 && (
-                        <Map selectedOffer={selectedOffer} classNameMap={ClassNameMap.Main} />
-                      )}
-                    </section>
-                  </div>
-                </div>
-                </>
-              ) : (
-                <MainEmpty />
-              )}
+              </div>
+            </div> ) : (<MainEmpty />)}
         </div>
       </main>
     </div>

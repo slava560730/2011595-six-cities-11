@@ -1,8 +1,8 @@
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeSelectedCity, sortOffersByType} from '../../store/action';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeSelectedCity, sortOffersByType } from '../../store/action';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import {SELECT_OPEN, SortType} from "../../consts";
+import { SELECT_OPEN, SortType } from '../../consts';
 
 type FavoritesProps = {
   city: string;
@@ -21,7 +21,7 @@ function CityItem({ city, selectedCity }: FavoritesProps): JSX.Element {
         })}
         to="#"
         onClick={() => {
-          dispatch(sortOffersByType(offersByCity, SortType.Popular, !SELECT_OPEN))
+          dispatch(sortOffersByType(offersByCity, SortType.Popular, !SELECT_OPEN));
           dispatch(changeSelectedCity(city));
         }}
       >

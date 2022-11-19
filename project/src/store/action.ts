@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { offers } from '../mocks/offers';
-import {Offer} from "../types/offer";
-import {SortType} from "../consts";
+import { Offer } from '../types/offer';
+import { SortType } from '../consts';
 
 export const changeSelectedCity = createAction('offers/changeSelectedCity', (city: string) => ({
   payload: {
@@ -19,13 +19,15 @@ export const updateOffersByCity = createAction('offers/updateOffersByCity', (cit
   };
 });
 
-export const sortOffersByType = createAction('offers/sortOffersByType', (offersByCity: Offer[], currentSortType: string, selectState:boolean) => {
+export const sortOffersByType = createAction(
+  'offers/sortOffersByType',
+  (offersByCity: Offer[], currentSortType: string, selectState: boolean) => {
     switch (currentSortType) {
       case SortType.Popular:
         return {
           payload: {
             offersByCity: offersByCity,
-            currentSortType:currentSortType,
+            currentSortType: currentSortType,
             selectState: selectState,
           },
         };
@@ -33,7 +35,7 @@ export const sortOffersByType = createAction('offers/sortOffersByType', (offersB
         return {
           payload: {
             offersByCity: [...offersByCity].sort((offerA, offerB) => offerA.price - offerB.price),
-            currentSortType:currentSortType,
+            currentSortType: currentSortType,
             selectState: selectState,
           },
         };
@@ -41,7 +43,7 @@ export const sortOffersByType = createAction('offers/sortOffersByType', (offersB
         return {
           payload: {
             offersByCity: [...offersByCity].sort((offerA, offerB) => offerB.price - offerA.price),
-            currentSortType:currentSortType,
+            currentSortType: currentSortType,
             selectState: selectState,
           },
         };
@@ -49,7 +51,7 @@ export const sortOffersByType = createAction('offers/sortOffersByType', (offersB
         return {
           payload: {
             offersByCity: [...offersByCity].sort((offerA, offerB) => offerB.rating - offerA.rating),
-            currentSortType:currentSortType,
+            currentSortType: currentSortType,
             selectState: selectState,
           },
         };
@@ -58,9 +60,10 @@ export const sortOffersByType = createAction('offers/sortOffersByType', (offersB
         return {
           payload: {
             offersByCity: offersByCity,
-            currentSortType:currentSortType,
+            currentSortType: currentSortType,
             selectState: selectState,
           },
         };
     }
-});
+  }
+);
