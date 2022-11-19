@@ -20,7 +20,7 @@ function Room({ reviews }: RoomProps): JSX.Element {
   const offersByCity = useAppSelector((state) => state.offersByCity);
   const params = useParams();
   const id = Number(params.id);
-  const [selectedOffer, setSelectedOffer] = useState(id);
+  const [selectedOffer, setSelectedOffer] = useState<null | number>(id);
   const currentOffer = offersByCity.find((offer) => offer.id === id);
 
   if (!currentOffer) {

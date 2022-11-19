@@ -3,7 +3,7 @@ import PlaceCard from '../place-card/place-card';
 import { useAppSelector } from '../../hooks';
 
 type OfferListProps = {
-  setSelectedOffer: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedOffer: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 function OfferList({ setSelectedOffer }: OfferListProps): JSX.Element {

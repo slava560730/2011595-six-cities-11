@@ -6,7 +6,7 @@ import { NULL_CITY_ID } from '../../consts';
 
 type PlaceCardProps = {
   offer: Offer;
-  setSelectedOffer: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedOffer: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 function PlaceCard({

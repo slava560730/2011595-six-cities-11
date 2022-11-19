@@ -38,7 +38,7 @@ export const offers: Offer[] = [
       longitude: 2.335499,
       zoom: 16,
     },
-    id: 74,
+    id: 1,
   },
   {
     city: {

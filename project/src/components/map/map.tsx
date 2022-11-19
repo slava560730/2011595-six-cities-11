@@ -6,8 +6,8 @@ import useMap from '../../hooks/useMap/useMap';
 import { useAppSelector } from '../../hooks';
 
 type MapProps = {
+  selectedOffer: number | null;
   classNameMap: string;
-  selectedOffer: number | undefined;
 };
 
 const defaultCustomIcon = new Icon({
@@ -27,15 +27,11 @@ function Map({ selectedOffer, classNameMap }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 
-  const newMarkers: Marker[] = [];
-  const [markers, setMarkers] = useState(newMarkers);
+  const [markers, setMarkers] = useState<Marker[]>([]);
 
   useEffect(() => {
+    const newMarkers: Marker[] = [];
     if (map) {
-      markers.forEach((marker) => {
-        marker.remove();
-      });
-
       offersByCity.forEach(({ location: { latitude, longitude }, id }) => {
         const marker = new Marker({
           lat: latitude,
@@ -51,7 +47,9 @@ function Map({ selectedOffer, classNameMap }: MapProps): JSX.Element {
         newMarkers.push(marker);
       });
       setMarkers(newMarkers);
-    }
+    } return markers.forEach((marker) => {
+      marker.remove();
+    });
   }, [map, offersByCity, selectedOffer]);
 
   return <div className={classNameMap} ref={mapRef}></div>;
