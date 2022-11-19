@@ -6,8 +6,8 @@ import useMap from '../../hooks/useMap/useMap';
 import { useAppSelector } from '../../hooks';
 
 type MapProps = {
-  classNameMap: string;
   selectedOffer: number | null;
+  classNameMap: string;
 };
 
 const defaultCustomIcon = new Icon({
