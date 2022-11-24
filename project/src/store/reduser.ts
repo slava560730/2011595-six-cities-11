@@ -14,7 +14,7 @@ const initialState: InitialState = {
   city: DEFAULT_CITY,
   offersByCity: [],
   currentSortType: SortType.Popular,
-  selectState:false,
+  selectState: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {

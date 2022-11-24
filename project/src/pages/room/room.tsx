@@ -17,7 +17,7 @@ type RoomProps = {
 };
 
 function Room({ reviews }: RoomProps): JSX.Element {
-  const offersByCity = useAppSelector((state) => state.offersByCity);
+  const { offersByCity } = useAppSelector((state) => state);
   const params = useParams();
   const id = Number(params.id);
   const [selectedOffer, setSelectedOffer] = useState<null | number>(id);
@@ -143,7 +143,7 @@ function Room({ reviews }: RoomProps): JSX.Element {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {nearOffers.map((offer) => (
-                <PlaceCard setSelectedOffer={setSelectedOffer} key={offer.id} offer={offer} />
+                <PlaceCard onSelectedOffer={setSelectedOffer} key={offer.id} offer={offer} />
               ))}
             </div>
           </section>

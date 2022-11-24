@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { updateOffersByCity } from '../../store/action';
 import { CITIES } from '../../consts';
 import CityItem from '../city-item/city-item';
 
-function CityList(): JSX.Element {
+type CityListProps = {
+  selectedCity: string;
+};
+
+function CityList({ selectedCity }: CityListProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const selectedCity = useAppSelector((state) => state.city);
 
   useEffect(() => {
     dispatch(updateOffersByCity(selectedCity));

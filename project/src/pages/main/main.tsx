@@ -11,8 +11,8 @@ import MainEmpty from '../../components/main-empty/main-empty';
 import cn from 'classnames';
 
 function Main(): JSX.Element {
-  const city = useAppSelector((state) => state.city);
-  const offersByCity = useAppSelector((state) => state.offersByCity);
+  const selectedCity = useAppSelector((state) => state.city);
+  const { offersByCity } = useAppSelector((state) => state);
 
   const [selectedOffer, setSelectedOffer] = useState<null | number>(NULL_CITY_ID);
 
@@ -30,7 +30,7 @@ function Main(): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CityList />
+            <CityList  selectedCity={selectedCity}/>
           </section>
         </div>
         <div className="cities">
@@ -39,10 +39,10 @@ function Main(): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">
-                  {offersByCity.length} places to stay in {city}
+                  {offersByCity.length} places to stay in {selectedCity}
                 </b>
                 <SortForm />
-                <OfferList setSelectedOffer={setSelectedOffer} />
+                <OfferList onSelectedOffer={setSelectedOffer} />
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
@@ -51,7 +51,10 @@ function Main(): JSX.Element {
                   )}
                 </section>
               </div>
-            </div> ) : (<MainEmpty />)}
+            </div>
+          ) : (
+            <MainEmpty selectedCity={selectedCity} />
+          )}
         </div>
       </main>
     </div>

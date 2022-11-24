@@ -1,4 +1,4 @@
-import { createAction } from '@reduxjs/toolkit';
+import {createAction} from '@reduxjs/toolkit';
 import { offers } from '../mocks/offers';
 import { Offer } from '../types/offer';
 import { SortType } from '../consts';
@@ -23,14 +23,6 @@ export const sortOffersByType = createAction(
   'offers/sortOffersByType',
   (offersByCity: Offer[], currentSortType: string, selectState: boolean) => {
     switch (currentSortType) {
-      case SortType.Popular:
-        return {
-          payload: {
-            offersByCity: offersByCity,
-            currentSortType: currentSortType,
-            selectState: selectState,
-          },
-        };
       case SortType.PriceLowToHigh:
         return {
           payload: {

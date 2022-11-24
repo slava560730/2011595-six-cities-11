@@ -4,9 +4,9 @@ import { SELECT_OPEN, SortType } from '../../consts';
 import { sortOffersByType } from '../../store/action';
 
 function SortForm(): JSX.Element {
-  const currentSortType = useAppSelector((state) => state.currentSortType);
-  const selectState = useAppSelector((state) => state.selectState);
-  const offersByCity = useAppSelector((state) => state.offersByCity);
+  const {currentSortType} = useAppSelector((state) => state);
+  const {selectState} = useAppSelector((state) => state);
+  const { offersByCity } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
   return (
