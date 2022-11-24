@@ -1,13 +1,11 @@
-import { Review } from '../../types/review';
+
 import AddReviewForm from '../add-review-form/add-review-form';
 import React from 'react';
 import PropertyReviewItem from '../property-review-item/property-review-item';
+import {reviews} from "../../mocks/reviews";
 
-type PropertyReviewsProps = {
-  reviews: Review[];
-};
 
-function PropertyReviews({ reviews }: PropertyReviewsProps): JSX.Element {
+function PropertyReviews(): JSX.Element {
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">

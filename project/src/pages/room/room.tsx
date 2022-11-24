@@ -5,17 +5,13 @@ import { ClassNameMap, OPTION_SINGLE } from '../../consts';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PlaceCard from '../../components/place-card/place-card';
-import { Review } from '../../types/review';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
 import cn from 'classnames';
 import { useAppSelector } from '../../hooks';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-type RoomProps = {
-  reviews: Review[];
-};
 
-function Room({ reviews }: RoomProps): JSX.Element {
+function Room(): JSX.Element {
   const { offersByCity } = useAppSelector((state) => state);
   const params = useParams();
   const id = Number(params.id);
@@ -131,7 +127,7 @@ function Room({ reviews }: RoomProps): JSX.Element {
                   <p className="property__text">{description}</p>
                 </div>
               </div>
-              <PropertyReviews reviews={reviews} />
+              <PropertyReviews/>
             </div>
           </div>
           <section className="property__map map">

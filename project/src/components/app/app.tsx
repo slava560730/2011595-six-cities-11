@@ -7,15 +7,10 @@ import Room from '../../pages/room/room';
 import PrivateRoute from '../../pages/private-route/private-route';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { HelmetProvider } from 'react-helmet-async';
-import { Review } from '../../types/review';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
-type AppProps = {
-  reviews: Review[];
-};
-
-function App({ reviews }: AppProps): JSX.Element {
+function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const { isOffersDataLoading } = useAppSelector((state) => state);
 
@@ -37,7 +32,7 @@ function App({ reviews }: AppProps): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Room} element={<Room reviews={reviews} />} />
+          <Route path={AppRoute.Room} element={<Room/>} />
           <Route path="*" element={<NotFoundScreen />} />
         </Routes>
       </BrowserRouter>
