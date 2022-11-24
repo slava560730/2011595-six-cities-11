@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from '../../pages/main/main';
-import { AppRoute } from '../../consts';
+import {AppRoute, AuthorizationStatus} from '../../consts';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Room from '../../pages/room/room';
@@ -19,7 +19,7 @@ function App({ reviews }: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const { isOffersDataLoading } = useAppSelector((state) => state);
 
-  if (isOffersDataLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return <LoadingScreen />;
   }
 
