@@ -1,9 +1,7 @@
-
 import AddReviewForm from '../add-review-form/add-review-form';
 import React from 'react';
 import PropertyReviewItem from '../property-review-item/property-review-item';
-import {reviews} from "../../mocks/reviews";
-
+import { reviews } from '../../mocks/reviews';
 
 function PropertyReviews(): JSX.Element {
   return (
