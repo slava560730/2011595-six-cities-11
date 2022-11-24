@@ -1,21 +1,28 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from '../../pages/main/main';
-import { AppRoute, AuthorizationStatus } from '../../consts';
+import { AppRoute } from '../../consts';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Room from '../../pages/room/room';
 import PrivateRoute from '../../pages/private-route/private-route';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { HelmetProvider } from 'react-helmet-async';
-import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 type AppProps = {
   reviews: Review[];
-  offers: Offer[];
 };
 
-function App({ offers, reviews }: AppProps): JSX.Element {
+function App({ reviews }: AppProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const { isOffersDataLoading } = useAppSelector((state) => state);
+
+  if (isOffersDataLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -25,8 +32,8 @@ function App({ offers, reviews }: AppProps): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites offers={offers} />
+              <PrivateRoute authorizationStatus={authorizationStatus}>
+                <Favorites />
               </PrivateRoute>
             }
           />

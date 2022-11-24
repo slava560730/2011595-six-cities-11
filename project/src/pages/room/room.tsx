@@ -9,7 +9,6 @@ import { Review } from '../../types/review';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
 import cn from 'classnames';
 import { useAppSelector } from '../../hooks';
-import { offers } from '../../mocks/offers';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type RoomProps = {
@@ -20,6 +19,7 @@ function Room({ reviews }: RoomProps): JSX.Element {
   const { offersByCity } = useAppSelector((state) => state);
   const params = useParams();
   const id = Number(params.id);
+  const { offers } = useAppSelector((state) => state);
   const [selectedOffer, setSelectedOffer] = useState<null | number>(id);
   const currentOffer = offersByCity.find((offer) => offer.id === id);
 
