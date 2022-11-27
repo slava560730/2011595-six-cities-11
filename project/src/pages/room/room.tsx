@@ -10,12 +10,11 @@ import cn from 'classnames';
 import { useAppSelector } from '../../hooks';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-
 function Room(): JSX.Element {
-  const { offersByCity } = useAppSelector((state) => state);
+  const offersByCity = useAppSelector((state) => state.offersByCity);
   const params = useParams();
   const id = Number(params.id);
-  const { offers } = useAppSelector((state) => state);
+  const offers = useAppSelector((state) => state.offers);
   const [selectedOffer, setSelectedOffer] = useState<null | number>(id);
   const currentOffer = offersByCity.find((offer) => offer.id === id);
 
@@ -127,7 +126,7 @@ function Room(): JSX.Element {
                   <p className="property__text">{description}</p>
                 </div>
               </div>
-              <PropertyReviews/>
+              <PropertyReviews />
             </div>
           </div>
           <section className="property__map map">

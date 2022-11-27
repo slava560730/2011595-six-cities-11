@@ -12,7 +12,7 @@ import cn from 'classnames';
 
 function Main(): JSX.Element {
   const selectedCity = useAppSelector((state) => state.city);
-  const { offersByCity } = useAppSelector((state) => state);
+  const offersByCity = useAppSelector((state) => state.offersByCity);
 
   const [selectedOffer, setSelectedOffer] = useState<null | number>(NULL_CITY_ID);
 

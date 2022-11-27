@@ -7,7 +7,7 @@ type OfferListProps = {
 };
 
 function OfferList({ onSelectedOffer }: OfferListProps): JSX.Element {
-  const { offersByCity } = useAppSelector((state) => state);
+  const offersByCity = useAppSelector((state) => state.offersByCity);
 
   return (
     <div className="cities__places-list places__list tabs__content">
