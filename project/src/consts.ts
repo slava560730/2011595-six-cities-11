@@ -6,17 +6,17 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum APIRoute {
-  Offers = '/hotels',
-  Login = '/login',
-  Logout = '/logout',
-}
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
   Room = '/offer/:id',
+}
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export enum ClassNameMap {
