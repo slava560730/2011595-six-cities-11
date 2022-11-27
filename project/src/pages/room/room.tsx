@@ -5,21 +5,17 @@ import { ClassNameMap, OPTION_SINGLE } from '../../consts';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PlaceCard from '../../components/place-card/place-card';
-import { Review } from '../../types/review';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
 import cn from 'classnames';
 import { useAppSelector } from '../../hooks';
-import { offers } from '../../mocks/offers';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-type RoomProps = {
-  reviews: Review[];
-};
 
-function Room({ reviews }: RoomProps): JSX.Element {
-  const offersByCity = useAppSelector((state) => state.offersByCity);
+function Room(): JSX.Element {
+  const { offersByCity } = useAppSelector((state) => state);
   const params = useParams();
   const id = Number(params.id);
+  const { offers } = useAppSelector((state) => state);
   const [selectedOffer, setSelectedOffer] = useState<null | number>(id);
   const currentOffer = offersByCity.find((offer) => offer.id === id);
 
@@ -131,7 +127,7 @@ function Room({ reviews }: RoomProps): JSX.Element {
                   <p className="property__text">{description}</p>
                 </div>
               </div>
-              <PropertyReviews reviews={reviews} />
+              <PropertyReviews/>
             </div>
           </div>
           <section className="property__map map">
@@ -143,7 +139,7 @@ function Room({ reviews }: RoomProps): JSX.Element {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {nearOffers.map((offer) => (
-                <PlaceCard setSelectedOffer={setSelectedOffer} key={offer.id} offer={offer} />
+                <PlaceCard onSelectedOffer={setSelectedOffer} key={offer.id} offer={offer} />
               ))}
             </div>
           </section>

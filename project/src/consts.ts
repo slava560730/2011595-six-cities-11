@@ -6,6 +6,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -42,5 +48,3 @@ export enum SortType {
   PriceHighToLow = 'Price: high to low',
   TopRatedFirst = 'Top rated first',
 }
-
-

@@ -23,7 +23,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map({ selectedOffer, classNameMap }: MapProps): JSX.Element {
-  const offersByCity = useAppSelector((state) => state.offersByCity);
+  const { offersByCity } = useAppSelector((state) => state);
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 
@@ -47,7 +47,8 @@ function Map({ selectedOffer, classNameMap }: MapProps): JSX.Element {
         newMarkers.push(marker);
       });
       setMarkers(newMarkers);
-    } return markers.forEach((marker) => {
+    }
+    return markers.forEach((marker) => {
       marker.remove();
     });
   }, [map, offersByCity, selectedOffer]);

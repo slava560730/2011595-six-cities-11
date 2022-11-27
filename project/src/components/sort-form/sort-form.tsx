@@ -4,9 +4,9 @@ import { SELECT_OPEN, SortType } from '../../consts';
 import { sortOffersByType } from '../../store/action';
 
 function SortForm(): JSX.Element {
-  const currentSortType = useAppSelector((state) => state.currentSortType);
-  const selectState = useAppSelector((state) => state.selectState);
-  const offersByCity = useAppSelector((state) => state.offersByCity);
+  const { currentSortType } = useAppSelector((state) => state);
+  const { selectState } = useAppSelector((state) => state);
+  const { offersByCity } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
   return (
@@ -16,8 +16,8 @@ function SortForm(): JSX.Element {
         className="places__sorting-type"
         tabIndex={0}
         onClick={() =>
-          dispatch(sortOffersByType(offersByCity, currentSortType || SortType.Popular,
-            SELECT_OPEN))}
+          dispatch(sortOffersByType(offersByCity,
+            currentSortType || SortType.Popular, SELECT_OPEN))}
       >
         {currentSortType}
         <svg className="places__sorting-arrow" width="7" height="4">

@@ -6,20 +6,20 @@ import { NULL_CITY_ID } from '../../consts';
 
 type PlaceCardProps = {
   offer: Offer;
-  setSelectedOffer: React.Dispatch<React.SetStateAction<number | null>>;
+  onSelectedOffer: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 function PlaceCard({
   offer: { id, isPremium, previewImage, price, isFavorite, rating, title, type },
-  setSelectedOffer,
+  onSelectedOffer,
 }: PlaceCardProps): JSX.Element {
   return (
     <article
       onMouseOver={() => {
-        setSelectedOffer(id);
+        onSelectedOffer(id);
       }}
       onMouseLeave={() => {
-        setSelectedOffer(NULL_CITY_ID);
+        onSelectedOffer(NULL_CITY_ID);
       }}
       className="cities__card place-card"
     >
