@@ -23,7 +23,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map({ selectedOffer, classNameMap }: MapProps): JSX.Element {
-  const { offersByCity } = useAppSelector((state) => state);
+  const offersByCity = useAppSelector((state) => state.offersByCity);
   const mapRef = useRef(null);
   const map = useMap(mapRef);
 

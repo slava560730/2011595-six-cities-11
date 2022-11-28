@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Main from '../../pages/main/main';
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import { AppRoute, AuthorizationStatus } from '../../consts';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Room from '../../pages/room/room';
@@ -9,10 +9,12 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const { isOffersDataLoading } = useAppSelector((state) => state);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return <LoadingScreen />;
@@ -20,7 +22,7 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route path={AppRoute.Main} element={<Main />} />
           <Route path={AppRoute.Login} element={<Login />} />
@@ -32,10 +34,10 @@ function App(): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Room} element={<Room/>} />
+          <Route path={AppRoute.Room} element={<Room />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

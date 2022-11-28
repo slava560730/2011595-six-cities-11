@@ -9,12 +9,12 @@ type CityListProps = {
 };
 
 function CityList({ selectedCity }: CityListProps): JSX.Element {
-  const { offers } = useAppSelector((state) => state);
+  const offers = useAppSelector((state) => state.offers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(updateOffersByCity(offers, selectedCity));
-  }, [selectedCity, offers]);
+    dispatch(updateOffersByCity(offers));
+  }, [offers, selectedCity]);
 
   return (
     <ul className="locations__list tabs__list">

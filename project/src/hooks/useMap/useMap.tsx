@@ -7,8 +7,8 @@ import { defaultCity } from '../../consts';
 function useMap(mapRef: MutableRefObject<HTMLElement | null>): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
-  const { city } = useAppSelector((state) => state);
-  const { offersByCity } = useAppSelector((state) => state);
+  const city = useAppSelector((state) => state.city);
+  const offersByCity = useAppSelector((state) => state.offersByCity);
   const currentCity: City =
     offersByCity.find((offer) => offer.city.name === city)?.city || defaultCity;
   const { latitude, longitude, zoom } = currentCity.location;

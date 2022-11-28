@@ -5,7 +5,7 @@ import FavoriteCard from '../../components/favorite-card/favorite-card';
 import { useAppSelector } from '../../hooks';
 
 function Favorites(): JSX.Element {
-  const { offers } = useAppSelector((state) => state);
+  const offers = useAppSelector((state) => state.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const citiesFavoriteOffers = new Set(favoriteOffers.map((offer) => offer.city.name));
 

@@ -3,6 +3,7 @@ import { AuthorizationStatus, DEFAULT_CITY, SortType } from '../consts';
 import {
   changeSelectedCity,
   loadOffers,
+  loadUserInfo,
   requireAuthorization,
   setOffersDataLoadingStatus,
   sortOffersByType,
@@ -18,6 +19,7 @@ type InitialState = {
   selectState: boolean;
   authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
+  userInfo: string;
 };
 
 const initialState: InitialState = {
@@ -28,6 +30,7 @@ const initialState: InitialState = {
   selectState: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
+  userInfo: '',
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -36,10 +39,15 @@ const reducer = createReducer(initialState, (builder) => {
       state.city = action.payload.city;
     })
     .addCase(updateOffersByCity, (state, action) => {
-      state.offersByCity = action.payload.offersByCity;
+      state.offersByCity = action.payload.offersByCity.filter(
+        (offer) => offer.city.name === state.city
+      );
     })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload.offers;
+    })
+    .addCase(loadUserInfo, (state, action) => {
+      state.userInfo = action.payload.userInfo;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload.authorizationStatus;

@@ -12,7 +12,7 @@ type CityItemProps = {
 
 function CityItem({ city, selectedCity }: CityItemProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const { offersByCity } = useAppSelector((state) => state);
+  const offersByCity = useAppSelector((state) => state.offersByCity);
 
   return (
     <li key={city} className="locations__item">

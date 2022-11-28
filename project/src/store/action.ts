@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Offer } from '../types/offer';
-import { AuthorizationStatus, SortType } from '../consts';
+import { AppRoute, AuthorizationStatus, SortType } from '../consts';
 
 export const changeSelectedCity = createAction('offers/changeSelectedCity', (city: string) => ({
   payload: {
@@ -8,22 +8,21 @@ export const changeSelectedCity = createAction('offers/changeSelectedCity', (cit
   },
 }));
 
-export const updateOffersByCity = createAction(
-  'offers/updateOffersByCity',
-  (offers: Offer[], city: string) => {
-    const offersByCity = offers.filter((offer) => offer.city.name === city);
-
-    return {
-      payload: {
-        offersByCity: offersByCity,
-      },
-    };
-  }
-);
+export const updateOffersByCity = createAction('offers/updateOffersByCity', (offers: Offer[]) => ({
+  payload: {
+    offersByCity: offers,
+  },
+}));
 
 export const loadOffers = createAction('data/loadOffers', (offers: Offer[]) => ({
   payload: {
     offers: offers,
+  },
+}));
+
+export const loadUserInfo = createAction('data/loadUserInfo', (userInfo: string) => ({
+  payload: {
+    userInfo: userInfo,
   },
 }));
 
@@ -85,3 +84,7 @@ export const setOffersDataLoadingStatus = createAction(
     },
   })
 );
+
+export const redirectToRoute = createAction('redirectToRoute', (toRoute: AppRoute) => ({
+  payload: toRoute,
+}));
