@@ -14,7 +14,9 @@ export enum AppRoute {
 }
 
 export enum APIRoute {
-  Offers = '/hotels',
+  Offers = '/hotels/',
+  NearbyOffers = '/nearby',
+  Reviews = '/comments/',
   Login = '/login',
   Logout = '/logout',
 }
@@ -48,3 +50,39 @@ export enum SortType {
   PriceHighToLow = 'Price: high to low',
   TopRatedFirst = 'Top rated first',
 }
+
+export const REVIEW_LENGTH = {
+  min: 50,
+  max: 300,
+};
+
+export const MAX_REVIEW_LENGTH = 300;
+export const MIN_REVIEW_LENGTH = 50;
+
+export const defaultReviewState = {
+  comment: '',
+  rating: 0,
+};
+
+export const ReviewRating = [
+  {
+    title: 'perfect',
+    value: 5,
+  },
+  {
+    title: 'good',
+    value: 4,
+  },
+  {
+    title: 'not bad',
+    value: 3,
+  },
+  {
+    title: 'badly',
+    value: 2,
+  },
+  {
+    title: 'terribly',
+    value: 1,
+  },
+];

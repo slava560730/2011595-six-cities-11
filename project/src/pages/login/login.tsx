@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { loginAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 import { FormEvent, useRef } from 'react';
-import { AuthData } from '../../types/auth-data';
 import { Link } from 'react-router-dom';
 
 function Login(): JSX.Element {
@@ -11,10 +10,6 @@ function Login(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-
-  const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
-  };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -25,10 +20,12 @@ function Login(): JSX.Element {
       passwordRef.current !== null &&
       passwordRef.current.value.match(passwordRule)
     ) {
-      onSubmit({
-        login: loginRef.current.value,
-        password: passwordRef.current.value.trim(),
-      });
+      dispatch(
+        loginAction({
+          login: loginRef.current.value,
+          password: passwordRef.current.value.trim(),
+        })
+      );
     }
   };
 

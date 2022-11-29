@@ -1,9 +1,13 @@
 import AddReviewForm from '../add-review-form/add-review-form';
 import React from 'react';
 import PropertyReviewItem from '../property-review-item/property-review-item';
-import { reviews } from '../../mocks/reviews';
+import { useAppSelector } from '../../hooks';
+import { AuthorizationStatus } from '../../consts';
 
 function PropertyReviews(): JSX.Element {
+  const reviews = useAppSelector((store) => store.reviews);
+  const authorizationStatus = useAppSelector((store) => store.authorizationStatus);
+
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">
@@ -14,7 +18,7 @@ function PropertyReviews(): JSX.Element {
           <PropertyReviewItem review={review} key={review.id} />
         ))}
       </ul>
-      <AddReviewForm />
+      {authorizationStatus === AuthorizationStatus.Auth && <AddReviewForm />}
     </section>
   );
 }
