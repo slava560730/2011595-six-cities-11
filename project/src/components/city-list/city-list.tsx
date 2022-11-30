@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { updateOffersByCity } from '../../store/action';
 import { CITIES } from '../../consts';
 import CityItem from '../city-item/city-item';
@@ -9,12 +9,11 @@ type CityListProps = {
 };
 
 function CityList({ selectedCity }: CityListProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(updateOffersByCity(offers));
-  }, [offers, selectedCity]);
+    dispatch(updateOffersByCity(selectedCity));
+  }, [selectedCity]);
 
   return (
     <ul className="locations__list tabs__list">

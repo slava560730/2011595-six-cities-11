@@ -2,21 +2,39 @@ import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import Map from '../../components/map/map';
 import { ClassNameMap, OPTION_SINGLE } from '../../consts';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PlaceCard from '../../components/place-card/place-card';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
 import cn from 'classnames';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import {
+  fetchCurrentOfferAction,
+  fetchNearbyOffersAction,
+  fetchReviewsAction,
+} from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { Offer } from '../../types/offer';
 
 function Room(): JSX.Element {
-  const offersByCity = useAppSelector((state) => state.offersByCity);
   const params = useParams();
   const id = Number(params.id);
-  const offers = useAppSelector((state) => state.offers);
+  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const dispatch = useAppDispatch();
+
   const [selectedOffer, setSelectedOffer] = useState<null | number>(id);
-  const currentOffer = offersByCity.find((offer) => offer.id === id);
+  const currentOffer = useAppSelector((state) => state.currentOffer);
+  useEffect(() => {
+    dispatch(fetchReviewsAction(id));
+    dispatch(fetchCurrentOfferAction(id));
+    dispatch(fetchNearbyOffersAction(id));
+  }, [id]);
+
+  if (isOfferDataLoading) {
+    return <LoadingScreen />;
+  }
 
   if (!currentOffer) {
     return <NotFoundScreen />;
@@ -36,7 +54,6 @@ function Room(): JSX.Element {
     host: { avatarUrl, name, isPro },
     description,
   } = currentOffer;
-  const nearOffers = offers.filter((offer) => offer.id !== Number(id));
 
   return (
     <div className="page">
@@ -130,14 +147,18 @@ function Room(): JSX.Element {
             </div>
           </div>
           <section className="property__map map">
-            <Map selectedOffer={selectedOffer} classNameMap={ClassNameMap.Room} />
+            <Map
+              offers={[...nearbyOffers, currentOffer] as Offer[]}
+              selectedOffer={selectedOffer}
+              classNameMap={ClassNameMap.Room}
+            />
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {nearOffers.map((offer) => (
+              {nearbyOffers.map((offer) => (
                 <PlaceCard onSelectedOffer={setSelectedOffer} key={offer.id} offer={offer} />
               ))}
             </div>

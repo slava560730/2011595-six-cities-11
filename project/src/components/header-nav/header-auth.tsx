@@ -6,15 +6,19 @@ import { AppRoute } from '../../consts';
 
 function HeaderAuth(): JSX.Element {
   const dispatch = useAppDispatch();
-  const userInfo = useAppSelector((state) => state.userInfo);
+  const userEmail = useAppSelector((state) => state.userEmail);
+  const avatarUrl = useAppSelector((state) => state.avatarUrl);
 
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
         <li className="header__nav-item user">
           <Link className="header__nav-link headerhg__nav-link--profile" to={AppRoute.Favorites}>
-            <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-            <span className="header__user-name user__name">{userInfo}</span>
+            <div
+              className="header__avatar-wrapper user__avatar-wrapper"
+              style={{ backgroundImage: `url("${avatarUrl}")`, borderRadius: '50%' }}
+            />
+            <span className="header__user-name user__name">{userEmail}</span>
             <span className="header__favorite-count">3</span>
           </Link>
         </li>

@@ -1,5 +1,6 @@
 import { Review } from '../../types/review';
 import React from 'react';
+import dayjs from 'dayjs';
 
 type PropertyReviewItemProps = {
   review: Review;
@@ -36,7 +37,7 @@ function PropertyReviewItem({
         </div>
         <p className="reviews__text">{comment}</p>
         <time className="reviews__time" dateTime={date}>
-          {date}
+          {dayjs(date).format('MMM YYYY')}
         </time>
       </div>
     </li>

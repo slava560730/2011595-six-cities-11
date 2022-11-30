@@ -47,7 +47,11 @@ function Main(): JSX.Element {
               <div className="cities__right-section">
                 <section className="cities__map map">
                   {offersByCity.length !== 0 && (
-                    <Map selectedOffer={selectedOffer} classNameMap={ClassNameMap.Main} />
+                    <Map
+                      offers={offersByCity}
+                      selectedOffer={selectedOffer}
+                      classNameMap={ClassNameMap.Main}
+                    />
                   )}
                 </section>
               </div>
