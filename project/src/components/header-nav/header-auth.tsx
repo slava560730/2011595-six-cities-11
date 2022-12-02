@@ -3,11 +3,12 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import React from 'react';
 import { AppRoute } from '../../consts';
+import { getAvatarUrl, getUserEmail } from '../../store/user-process/selectors';
 
 function HeaderAuth(): JSX.Element {
   const dispatch = useAppDispatch();
-  const userEmail = useAppSelector((state) => state.userEmail);
-  const avatarUrl = useAppSelector((state) => state.avatarUrl);
+  const userEmail = useAppSelector(getUserEmail);
+  const avatarUrl = useAppSelector(getAvatarUrl);
 
   return (
     <nav className="header__nav">

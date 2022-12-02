@@ -1,5 +1,13 @@
 import { City } from './types/offer';
 
+export const URL_MARKER_DEFAULT = '../../img/pin.svg';
+export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
+export const OPTION_SINGLE = 1;
+export const MAIN_CITY = 'Paris';
+export const NULL_CITY_ID = null;
+export const SELECT_OPEN = true;
+export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -26,7 +34,7 @@ export enum ClassNameMap {
   Room = 'property__leaflet',
 }
 
-export const defaultCity: City = {
+export const DEFAULT_CITY: City = {
   name: 'Paris',
   location: {
     latitude: 48.864716,
@@ -35,15 +43,6 @@ export const defaultCity: City = {
   },
 };
 
-export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
-
-export const URL_MARKER_DEFAULT = '../../img/pin.svg';
-export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
-export const OPTION_SINGLE = 1;
-export const DEFAULT_CITY = 'Paris';
-export const NULL_CITY_ID = null;
-export const SELECT_OPEN = true;
-
 export enum SortType {
   Popular = 'Popular',
   PriceLowToHigh = 'Price: low to high',
@@ -51,20 +50,17 @@ export enum SortType {
   TopRatedFirst = 'Top rated first',
 }
 
-export const REVIEW_LENGTH = {
-  min: 50,
-  max: 300,
-};
+export enum ReviewLength {
+  Min = 50,
+  Max = 300,
+}
 
-export const MAX_REVIEW_LENGTH = 300;
-export const MIN_REVIEW_LENGTH = 50;
-
-export const defaultReviewState = {
+export const DEFAULT_REVIEW_STATE = {
   comment: '',
   rating: 0,
 };
 
-export const ReviewRating = [
+export const REVIEW_RATING = [
   {
     title: 'perfect',
     value: 5,
@@ -86,3 +82,9 @@ export const ReviewRating = [
     value: 1,
   },
 ];
+
+export enum NameSpace {
+  Data = 'DATA',
+  App = 'APP',
+  User = 'USER',
+}

@@ -1,9 +1,9 @@
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeSelectedCity, sortOffersByType } from '../../store/action';
+import { useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { SELECT_OPEN, SortType } from '../../consts';
 import React from 'react';
+import { changeSelectedCity, sortOffersByType } from '../../store/app-process/app-process';
 
 type CityItemProps = {
   city: string;
@@ -12,7 +12,6 @@ type CityItemProps = {
 
 function CityItem({ city, selectedCity }: CityItemProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const offersByCity = useAppSelector((state) => state.offersByCity);
 
   return (
     <li key={city} className="locations__item">
@@ -23,7 +22,12 @@ function CityItem({ city, selectedCity }: CityItemProps): JSX.Element {
         to="#"
         onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
           e.preventDefault();
-          dispatch(sortOffersByType(offersByCity, SortType.Popular, !SELECT_OPEN));
+          dispatch(
+            sortOffersByType({
+              currentSortType: SortType.Popular,
+              selectState: !SELECT_OPEN,
+            })
+          );
           dispatch(changeSelectedCity(city));
         }}
       >

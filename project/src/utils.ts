@@ -8,3 +8,8 @@ export const sortByDay = (reviewA: Review, reviewB: Review) => {
     return -1;
   }
 };
+
+export function arrayRandElement(arr: string[]) {
+  const rand = Math.floor(Math.random() * arr.length);
+  return arr[rand];
+}

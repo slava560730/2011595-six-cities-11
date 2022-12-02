@@ -16,16 +16,21 @@ import {
 } from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { Offer } from '../../types/offer';
+import {
+  getCurrentOffer,
+  getNearbyOffers,
+  getOfferDataLoadingState,
+} from '../../store/app-data/selectors';
 
 function Room(): JSX.Element {
   const params = useParams();
   const id = Number(params.id);
-  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const isOfferDataLoading = useAppSelector(getOfferDataLoadingState);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
   const dispatch = useAppDispatch();
 
   const [selectedOffer, setSelectedOffer] = useState<null | number>(id);
-  const currentOffer = useAppSelector((state) => state.currentOffer);
+  const currentOffer = useAppSelector(getCurrentOffer);
   useEffect(() => {
     dispatch(fetchReviewsAction(id));
     dispatch(fetchCurrentOfferAction(id));
@@ -95,7 +100,7 @@ function Room(): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: `${rating * 20}%` }}></span>
+                  <span style={{ width: `${Math.round(rating) * 20}%` }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>

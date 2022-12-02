@@ -6,3 +6,8 @@ export type UserData = {
   avatarUrl: string;
   isPro: boolean;
 };
+
+export type UserDataProfile = {
+  email: string;
+  avatarUrl: string;
+};

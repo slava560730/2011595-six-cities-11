@@ -3,15 +3,16 @@ import { NewReview } from '../../types/review';
 import { fetchPostReviewAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
-import { defaultReviewState, REVIEW_LENGTH, ReviewRating } from '../../consts';
+import { DEFAULT_REVIEW_STATE, ReviewLength, REVIEW_RATING } from '../../consts';
+import { getFormActiveState } from '../../store/app-data/selectors';
 
 function AddReviewForm(): JSX.Element {
-  const formActiveState = useAppSelector((state) => state.formActiveState);
+  const formActiveState = useAppSelector(getFormActiveState);
   const params = useParams();
   const id = Number(params.id);
   const dispatch = useAppDispatch();
 
-  const [formData, setFormData] = useState<NewReview>(defaultReviewState);
+  const [formData, setFormData] = useState<NewReview>(DEFAULT_REVIEW_STATE);
   const { comment, rating } = formData;
 
   const fieldChangeHandle = ({
@@ -24,7 +25,7 @@ function AddReviewForm(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(fetchPostReviewAction([formData, id]));
-    setFormData(defaultReviewState);
+    setFormData(DEFAULT_REVIEW_STATE);
   };
 
   return (
@@ -33,7 +34,7 @@ function AddReviewForm(): JSX.Element {
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {ReviewRating.map((data) => (
+        {REVIEW_RATING.map((data) => (
           <>
             <input
               className="form__rating-input visually-hidden"
@@ -60,7 +61,7 @@ function AddReviewForm(): JSX.Element {
         className="reviews__textarea form__textarea"
         id="comment"
         name="comment"
-        maxLength={REVIEW_LENGTH.max}
+        maxLength={ReviewLength.Max}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={fieldChangeHandle}
         value={comment}
@@ -74,7 +75,7 @@ function AddReviewForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={comment.length < REVIEW_LENGTH.min || rating === 0 || formActiveState}
+          disabled={comment.length < ReviewLength.Min || rating === 0 || formActiveState}
         >
           Submit
         </button>
