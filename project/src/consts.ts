@@ -24,6 +24,7 @@ export enum AppRoute {
 export enum APIRoute {
   Offers = '/hotels/',
   NearbyOffers = '/nearby',
+  FavoriteOffers = '/favorite/',
   Reviews = '/comments/',
   Login = '/login',
   Logout = '/logout',
@@ -87,4 +88,9 @@ export enum NameSpace {
   Data = 'DATA',
   App = 'APP',
   User = 'USER',
+}
+
+export enum FavoriteStatus {
+  Favorite = 1,
+  NotFavorite = 0
 }

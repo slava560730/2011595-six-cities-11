@@ -2,7 +2,7 @@ import { AppData } from '../../types/state';
 import { NameSpace } from '../../consts';
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  fetchCurrentOfferAction,
+  fetchCurrentOfferAction, fetchFavoriteOffersAction,
   fetchNearbyOffersAction,
   fetchOffersAction,
   fetchPostReviewAction,
@@ -11,10 +11,12 @@ import {
 
 const initialState: AppData = {
   offers: [],
+  favoriteOffers: [],
   nearbyOffers: [],
   reviews: [],
   currentOffer: undefined,
   isOffersDataLoading: false,
+  isFavoriteOffersDataLoading: false,
   isOfferDataLoading: false,
   formActiveState: false,
 };
@@ -51,6 +53,13 @@ export const appData = createSlice({
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
+      })
+      .addCase(fetchFavoriteOffersAction.pending, (state) => {
+        state.isFavoriteOffersDataLoading = true;
+      })
+      .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
+        state.isFavoriteOffersDataLoading = false;
       });
   },
 });

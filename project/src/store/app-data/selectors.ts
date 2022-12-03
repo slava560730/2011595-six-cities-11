@@ -4,14 +4,17 @@ import { NameSpace } from '../../consts';
 import { Review } from '../../types/review';
 import { sortByDay } from '../../utils';
 import { createSelector } from '@reduxjs/toolkit';
-import { getCurrentCity } from '../app-process/selectors';
+import {getCurrentCity} from "../app-process/selectors";
 
 export const getOffers = (state: State): Offer[] => state[NameSpace.Data].offers;
 export const getNearbyOffers = (state: State): Offer[] => state[NameSpace.Data].nearbyOffers;
+export const getFavoriteOffers = (state: State): Offer[] => state[NameSpace.Data].favoriteOffers;
 export const getOffersDataLoadingState = (state: State): boolean =>
   state[NameSpace.Data].isOffersDataLoading;
 export const getOfferDataLoadingState = (state: State): boolean =>
   state[NameSpace.Data].isOfferDataLoading;
+export const getFavoriteOfferDataLoadingState = (state: State): boolean =>
+  state[NameSpace.Data].isFavoriteOffersDataLoading;
 export const getFormActiveState = (state: State): boolean => state[NameSpace.Data].formActiveState;
 export const getCurrentOffer = (state: State): Offer | undefined =>
   state[NameSpace.Data].currentOffer;

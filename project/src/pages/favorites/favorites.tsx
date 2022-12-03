@@ -3,13 +3,13 @@ import Footer from '../../components/footer/footer';
 import { Helmet } from 'react-helmet-async';
 import FavoriteCard from '../../components/favorite-card/favorite-card';
 import { useAppSelector } from '../../hooks';
-import { getOffers } from '../../store/app-data/selectors';
+import {getFavoriteOffers} from '../../store/app-data/selectors';
 
 function Favorites(): JSX.Element {
-  const offers = useAppSelector(getOffers);
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
-  const citiesFavoriteOffers = new Set(favoriteOffers.map((offer) => offer.city.name));
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
 
+  const citiesFavoriteOffers = new Set(favoriteOffers.map((offer) => offer.city.name));
+console.log(favoriteOffers)
   return (
     <div className="page">
       <Helmet>

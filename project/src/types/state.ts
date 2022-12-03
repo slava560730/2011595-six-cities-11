@@ -21,9 +21,11 @@ export type AppProcess = {
 
 export type AppData = {
   offers: Offer[];
+  favoriteOffers: Offer[],
   nearbyOffers: Offer[];
   reviews: Review[];
   currentOffer?: Offer | undefined;
+  isFavoriteOffersDataLoading: boolean;
   isOffersDataLoading: boolean;
   isOfferDataLoading: boolean;
   formActiveState: boolean;
