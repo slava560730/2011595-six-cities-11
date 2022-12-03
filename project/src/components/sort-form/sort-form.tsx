@@ -1,12 +1,13 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import cn from 'classnames';
 import { SELECT_OPEN, SortType } from '../../consts';
-import { sortOffersByType } from '../../store/action';
+import React from 'react';
+import { sortOffersByType } from '../../store/app-process/app-process';
+import { getCurrentSortType, getSelectState } from '../../store/app-process/selectors';
 
 function SortForm(): JSX.Element {
-  const currentSortType = useAppSelector((state) => state.currentSortType);
-  const selectState = useAppSelector((state) => state.selectState);
-  const offersByCity = useAppSelector((state) => state.offersByCity);
+  const currentSortType = useAppSelector(getCurrentSortType);
+  const selectState = useAppSelector(getSelectState);
   const dispatch = useAppDispatch();
 
   return (
@@ -15,9 +16,14 @@ function SortForm(): JSX.Element {
       <span
         className="places__sorting-type"
         tabIndex={0}
-        onClick={() =>
-          dispatch(sortOffersByType(offersByCity, currentSortType
-            || SortType.Popular, SELECT_OPEN))}
+        onClick={() => {
+          dispatch(
+            sortOffersByType({
+              currentSortType: currentSortType || SortType.Popular,
+              selectState: SELECT_OPEN,
+            })
+          );
+        }}
       >
         {currentSortType}
         <svg className="places__sorting-arrow" width="7" height="4">
@@ -34,7 +40,12 @@ function SortForm(): JSX.Element {
             key={type}
             className={cn('places__option', { 'places__option--active': currentSortType === type })}
             onClick={() => {
-              dispatch(sortOffersByType(offersByCity, type, !SELECT_OPEN));
+              dispatch(
+                sortOffersByType({
+                  currentSortType: type,
+                  selectState: !SELECT_OPEN,
+                })
+              );
             }}
             tabIndex={0}
           >

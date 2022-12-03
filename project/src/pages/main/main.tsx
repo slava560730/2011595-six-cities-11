@@ -9,10 +9,11 @@ import CityList from '../../components/city-list/city-list';
 import SortForm from '../../components/sort-form/sort-form';
 import MainEmpty from '../../components/main-empty/main-empty';
 import cn from 'classnames';
+import { getCurrentCity, getSortedOffers } from '../../store/app-process/selectors';
 
 function Main(): JSX.Element {
-  const selectedCity = useAppSelector((state) => state.city);
-  const offersByCity = useAppSelector((state) => state.offersByCity);
+  const selectedCity = useAppSelector(getCurrentCity);
+  const offersByCity = useAppSelector(getSortedOffers);
 
   const [selectedOffer, setSelectedOffer] = useState<null | number>(NULL_CITY_ID);
 

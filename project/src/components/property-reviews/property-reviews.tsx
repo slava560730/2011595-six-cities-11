@@ -3,10 +3,12 @@ import React from 'react';
 import PropertyReviewItem from '../property-review-item/property-review-item';
 import { useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../consts';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getSortedReviews } from '../../store/app-data/selectors';
 
 function PropertyReviews(): JSX.Element {
-  const reviews = useAppSelector((store) => store.reviews);
-  const authorizationStatus = useAppSelector((store) => store.authorizationStatus);
+  const reviews = useAppSelector(getSortedReviews);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <section className="property__reviews reviews">
