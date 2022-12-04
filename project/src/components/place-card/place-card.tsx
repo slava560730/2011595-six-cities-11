@@ -16,7 +16,8 @@ type PlaceCardProps = {
 
 function PlaceCard({
   offer: { id, isPremium, previewImage, price, isFavorite, rating, title, type },
-  onSelectedOffer, offerId,
+  onSelectedOffer,
+  offerId,
   isNeedMouseLeave,
 }: PlaceCardProps): JSX.Element {
   const dispatch = useAppDispatch();
@@ -37,13 +38,13 @@ function PlaceCard({
 
   return (
     <article
-      onMouseOver={() => {
-        onSelectedOffer(offerId);
-      }}
       onMouseLeave={() => {
         if (isNeedMouseLeave) {
           onSelectedOffer(NULL_CITY_ID);
         }
+      }}
+      onMouseOver={() => {
+        onSelectedOffer(offerId);
       }}
       className="cities__card place-card"
     >
