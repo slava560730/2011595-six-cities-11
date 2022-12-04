@@ -3,7 +3,9 @@ import { City } from './types/offer';
 export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
 export const OPTION_SINGLE = 1;
+export const MAX_IMG = -6;
 export const MAIN_CITY = 'Paris';
+export const NEED_MOUSE_LEAVE = true;
 export const NULL_CITY_ID = null;
 export const SELECT_OPEN = true;
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
@@ -90,7 +92,7 @@ export enum NameSpace {
   User = 'USER',
 }
 
-export enum FavoriteStatus {
-  Favorite = 1,
-  NotFavorite = 0
+export enum FavoriteState {
+  Favorite = '1',
+  NotFavorite = '0',
 }

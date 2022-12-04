@@ -115,9 +115,10 @@ export const logoutAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('user/logout', async (_arg, { extra: api }) => {
+>('user/logout', async (_arg, { dispatch, extra: api }) => {
   await api.delete(APIRoute.Logout);
   dropToken();
+  dispatch(fetchOffersAction());
 });
 
 export const fetchFavoriteOffersAction = createAsyncThunk<
@@ -128,7 +129,20 @@ export const fetchFavoriteOffersAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
-  >('data/fetchOffers', async (_arg, { extra: api }) => {
+>('data/fetchFavoriteOffers', async (_arg, { extra: api }) => {
   const { data } = await api.get<Offer[]>(APIRoute.FavoriteOffers);
+  return data;
+});
+
+export const fetchPostFavoriteStateAction = createAsyncThunk<
+  Offer,
+  [string, number],
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/fetchPostFavoriteState', async ([favoriteState, id], { extra: api }) => {
+  const { data } = await api.post<Offer>(`${APIRoute.FavoriteOffers}${id}/${favoriteState}`);
   return data;
 });

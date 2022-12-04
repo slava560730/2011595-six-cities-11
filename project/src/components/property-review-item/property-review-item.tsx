@@ -14,6 +14,8 @@ function PropertyReviewItem({
     comment,
   },
 }: PropertyReviewItemProps): JSX.Element {
+  const formatData = dayjs(date).format('MMM YYYY');
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -37,7 +39,7 @@ function PropertyReviewItem({
         </div>
         <p className="reviews__text">{comment}</p>
         <time className="reviews__time" dateTime={date}>
-          {dayjs(date).format('MMM YYYY')}
+          {formatData}
         </time>
       </div>
     </li>

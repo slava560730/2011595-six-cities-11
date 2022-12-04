@@ -1,25 +1,49 @@
 import { Offer } from '../../types/offer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React from 'react';
 import cn from 'classnames';
-import { NULL_CITY_ID } from '../../consts';
+import { AppRoute, FavoriteState, NULL_CITY_ID } from '../../consts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchPostFavoriteStateAction } from '../../store/api-actions';
+import { getAuthLoggedStatus } from '../../store/user-process/selectors';
 
 type PlaceCardProps = {
   offer: Offer;
+  offerId: number;
+  isNeedMouseLeave: boolean;
   onSelectedOffer: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
 function PlaceCard({
   offer: { id, isPremium, previewImage, price, isFavorite, rating, title, type },
-  onSelectedOffer,
+  onSelectedOffer, offerId,
+  isNeedMouseLeave,
 }: PlaceCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const isAuthLogged = useAppSelector(getAuthLoggedStatus);
+  const navigate = useNavigate();
+
+  const handleFavoriteButtonClick = () => {
+    if (!isAuthLogged) {
+      navigate(AppRoute.Login);
+    }
+    dispatch(
+      fetchPostFavoriteStateAction([
+        isFavorite ? FavoriteState.NotFavorite : FavoriteState.Favorite,
+        id,
+      ])
+    );
+  };
+
   return (
     <article
       onMouseOver={() => {
-        onSelectedOffer(id);
+        onSelectedOffer(offerId);
       }}
       onMouseLeave={() => {
-        onSelectedOffer(NULL_CITY_ID);
+        if (isNeedMouseLeave) {
+          onSelectedOffer(NULL_CITY_ID);
+        }
       }}
       className="cities__card place-card"
     >
@@ -50,6 +74,7 @@ function PlaceCard({
               'place-card__bookmark-button--active': isFavorite,
             })}
             type="button"
+            onClick={handleFavoriteButtonClick}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>

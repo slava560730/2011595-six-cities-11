@@ -2,12 +2,15 @@ import { AppData } from '../../types/state';
 import { NameSpace } from '../../consts';
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  fetchCurrentOfferAction, fetchFavoriteOffersAction,
+  fetchCurrentOfferAction,
+  fetchFavoriteOffersAction,
   fetchNearbyOffersAction,
   fetchOffersAction,
+  fetchPostFavoriteStateAction,
   fetchPostReviewAction,
   fetchReviewsAction,
 } from '../api-actions';
+import { updateOffers } from '../../utils';
 
 const initialState: AppData = {
   offers: [],
@@ -16,7 +19,7 @@ const initialState: AppData = {
   reviews: [],
   currentOffer: undefined,
   isOffersDataLoading: false,
-  isFavoriteOffersDataLoading: false,
+  isPostFavoriteStateStatus: false,
   isOfferDataLoading: false,
   formActiveState: false,
 };
@@ -54,12 +57,22 @@ export const appData = createSlice({
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
-      .addCase(fetchFavoriteOffersAction.pending, (state) => {
-        state.isFavoriteOffersDataLoading = true;
-      })
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
-        state.isFavoriteOffersDataLoading = false;
+      })
+      .addCase(fetchPostFavoriteStateAction.pending, (state) => {
+        state.isPostFavoriteStateStatus = true;
+      })
+      .addCase(fetchPostFavoriteStateAction.rejected, (state) => {
+        state.isPostFavoriteStateStatus = true;
+      })
+      .addCase(fetchPostFavoriteStateAction.fulfilled, (state, action) => {
+        state.offers = updateOffers(state.offers, action.payload);
+        state.nearbyOffers = updateOffers(state.nearbyOffers, action.payload);
+        state.isPostFavoriteStateStatus = false;
+        if (state.currentOffer) {
+          state.currentOffer.isFavorite = action.payload.isFavorite;
+        }
       });
   },
 });

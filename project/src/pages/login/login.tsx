@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { loginAction } from '../../store/api-actions';
 import React, { FormEvent, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { store } from '../../store';
 import { redirectToRoute } from '../../store/action';
 import { AppRoute, CITIES, MAIN_CITY } from '../../consts';
 import { useAppDispatch } from '../../hooks';
@@ -26,7 +25,7 @@ function Login(): JSX.Element {
       passwordRef.current.value.match(passwordRule)
     ) {
       dispatch(changeSelectedCity(MAIN_CITY));
-      store.dispatch(
+      dispatch(
         loginAction({
           login: loginRef.current.value,
           password: passwordRef.current.value.trim(),

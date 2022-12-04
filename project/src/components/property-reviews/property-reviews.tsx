@@ -2,13 +2,12 @@ import AddReviewForm from '../add-review-form/add-review-form';
 import React from 'react';
 import PropertyReviewItem from '../property-review-item/property-review-item';
 import { useAppSelector } from '../../hooks';
-import { AuthorizationStatus } from '../../consts';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getAuthLoggedStatus } from '../../store/user-process/selectors';
 import { getSortedReviews } from '../../store/app-data/selectors';
 
 function PropertyReviews(): JSX.Element {
   const reviews = useAppSelector(getSortedReviews);
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isAuthLoggedStatus = useAppSelector(getAuthLoggedStatus);
 
   return (
     <section className="property__reviews reviews">
@@ -20,7 +19,7 @@ function PropertyReviews(): JSX.Element {
           <PropertyReviewItem review={review} key={review.id} />
         ))}
       </ul>
-      {authorizationStatus === AuthorizationStatus.Auth && <AddReviewForm />}
+      {isAuthLoggedStatus && <AddReviewForm />}
     </section>
   );
 }

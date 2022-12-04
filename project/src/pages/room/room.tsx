@@ -1,9 +1,16 @@
 import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import Map from '../../components/map/map';
-import { ClassNameMap, OPTION_SINGLE } from '../../consts';
+import {
+  AppRoute,
+  ClassNameMap,
+  FavoriteState,
+  MAX_IMG,
+  NEED_MOUSE_LEAVE,
+  OPTION_SINGLE,
+} from '../../consts';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PlaceCard from '../../components/place-card/place-card';
 import PropertyReviews from '../../components/property-reviews/property-reviews';
 import cn from 'classnames';
@@ -12,6 +19,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import {
   fetchCurrentOfferAction,
   fetchNearbyOffersAction,
+  fetchPostFavoriteStateAction,
   fetchReviewsAction,
 } from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
@@ -21,16 +29,20 @@ import {
   getNearbyOffers,
   getOfferDataLoadingState,
 } from '../../store/app-data/selectors';
+import { getAuthLoggedStatus } from '../../store/user-process/selectors';
 
 function Room(): JSX.Element {
   const params = useParams();
   const id = Number(params.id);
   const isOfferDataLoading = useAppSelector(getOfferDataLoadingState);
   const nearbyOffers = useAppSelector(getNearbyOffers);
+  const isAuthLogged = useAppSelector(getAuthLoggedStatus);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [selectedOffer, setSelectedOffer] = useState<null | number>(id);
   const currentOffer = useAppSelector(getCurrentOffer);
+
   useEffect(() => {
     dispatch(fetchReviewsAction(id));
     dispatch(fetchCurrentOfferAction(id));
@@ -60,6 +72,18 @@ function Room(): JSX.Element {
     description,
   } = currentOffer;
 
+  const handleFavoriteButtonClick = () => {
+    if (!isAuthLogged) {
+      navigate(AppRoute.Login);
+    }
+    dispatch(
+      fetchPostFavoriteStateAction([
+        isFavorite ? FavoriteState.NotFavorite : FavoriteState.Favorite,
+        id,
+      ])
+    );
+  };
+
   return (
     <div className="page">
       <Helmet>
@@ -70,7 +94,7 @@ function Room(): JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((img) => (
+              {images.slice(MAX_IMG).map((img) => (
                 <div className="property__image-wrapper" key={img}>
                   <img className="property__image" src={img} alt={description} />
                 </div>
@@ -91,6 +115,7 @@ function Room(): JSX.Element {
                     'property__bookmark-button--active': isFavorite,
                   })}
                   type="button"
+                  onClick={handleFavoriteButtonClick}
                 >
                   <svg className="place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
@@ -132,7 +157,11 @@ function Room(): JSX.Element {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                  <div
+                    className={cn('property__avatar-wrapper user__avatar-wrapper', {
+                      'property__avatar-wrapper--pro': isPro,
+                    })}
+                  >
                     <img
                       className="property__avatar user__avatar"
                       src={avatarUrl}
@@ -164,7 +193,13 @@ function Room(): JSX.Element {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {nearbyOffers.map((offer) => (
-                <PlaceCard onSelectedOffer={setSelectedOffer} key={offer.id} offer={offer} />
+                <PlaceCard
+                  onSelectedOffer={setSelectedOffer}
+                  key={offer.id}
+                  offer={offer}
+                  offerId={id}
+                  isNeedMouseLeave={!NEED_MOUSE_LEAVE}
+                />
               ))}
             </div>
           </section>
