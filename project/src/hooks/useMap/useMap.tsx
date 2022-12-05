@@ -3,14 +3,13 @@ import { Map, TileLayer } from 'leaflet';
 import { City } from '../../types/offer';
 import { useAppSelector } from '../index';
 import { DEFAULT_CITY } from '../../consts';
-import { getOffersByCity } from '../../store/app-data/selectors';
-import { getCurrentCity } from '../../store/app-process/selectors';
+import { getCurrentCity, getSortedOffers } from '../../store/app-process/selectors';
 
 function useMap(mapRef: MutableRefObject<HTMLElement | null>): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
   const city = useAppSelector(getCurrentCity);
-  const offersByCity = useAppSelector(getOffersByCity);
+  const offersByCity = useAppSelector(getSortedOffers);
   const currentCity: City =
     offersByCity.find((offer) => offer.city.name === city)?.city || DEFAULT_CITY;
   const { latitude, longitude, zoom } = currentCity.location;

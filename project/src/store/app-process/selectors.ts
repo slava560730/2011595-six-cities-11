@@ -1,11 +1,15 @@
 import { State } from '../../types/state';
 import { NameSpace, SortType } from '../../consts';
-import { getOffersByCity } from '../app-data/selectors';
+import { getOffers } from '../app-data/selectors';
 import { createSelector } from '@reduxjs/toolkit';
 
 export const getCurrentCity = (state: State): string => state[NameSpace.App].city;
 export const getCurrentSortType = (state: State): string => state[NameSpace.App].currentSortType;
 export const getSelectState = (state: State): boolean => state[NameSpace.App].selectState;
+
+export const getOffersByCity = createSelector(getOffers, getCurrentCity, (offers, currentCity) =>
+  offers.filter((offer) => offer.city.name === currentCity)
+);
 
 export const getSortedOffers = createSelector(
   getOffersByCity,

@@ -7,14 +7,22 @@ import Room from '../../pages/room/room';
 import PrivateRoute from '../../pages/private-route/private-route';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { HelmetProvider } from 'react-helmet-async';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import { getAuthCheckedStatus } from '../../store/user-process/selectors';
 import { getOffersDataLoadingState } from '../../store/app-data/selectors';
+import { useEffect } from 'react';
+import { fetchOffersAction } from '../../store/api-actions';
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+  }, []);
+
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingState);
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
 

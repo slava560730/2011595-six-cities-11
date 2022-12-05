@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { DEFAULT_REVIEW_STATE, ReviewLength, REVIEW_RATING } from '../../consts';
 import { getFormActiveState } from '../../store/app-data/selectors';
+import ReviewStar from '../review-star/review-star';
 
 function AddReviewForm(): JSX.Element {
   const formActiveState = useAppSelector(getFormActiveState);
@@ -15,7 +16,7 @@ function AddReviewForm(): JSX.Element {
   const [formData, setFormData] = useState<NewReview>(DEFAULT_REVIEW_STATE);
   const { comment, rating } = formData;
 
-  const fieldChangeHandle = ({
+  const onFieldChangeHandle = ({
     target,
   }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = target;
@@ -35,26 +36,13 @@ function AddReviewForm(): JSX.Element {
       </label>
       <div className="reviews__rating-form form__rating">
         {REVIEW_RATING.map((data) => (
-          <>
-            <input
-              className="form__rating-input visually-hidden"
-              name="rating"
-              value={data.value}
-              id={`${data.value}-stars`}
-              type="radio"
-              onChange={fieldChangeHandle}
-              checked={data.value === Number(rating)}
-            />
-            <label
-              htmlFor={`${data.value}-stars`}
-              className="reviews__rating-label form__rating-label"
-              title={data.title}
-            >
-              <svg className="form__star-image" width="37" height="33">
-                <use xlinkHref="#icon-star"></use>
-              </svg>
-            </label>
-          </>
+          <ReviewStar
+            onFieldChangeHandle={onFieldChangeHandle}
+            value={data.value}
+            title={data.title}
+            rating={rating}
+            key={data.value}
+          />
         ))}
       </div>
       <textarea
@@ -63,7 +51,7 @@ function AddReviewForm(): JSX.Element {
         name="comment"
         maxLength={ReviewLength.Max}
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={fieldChangeHandle}
+        onChange={onFieldChangeHandle}
         value={comment}
         disabled={formActiveState}
       />
