@@ -16,7 +16,7 @@ function AddReviewForm(): JSX.Element {
   const [formData, setFormData] = useState<NewReview>(DEFAULT_REVIEW_STATE);
   const { comment, rating } = formData;
 
-  const onFieldChangeHandle = ({
+  const handleFieldChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = target;
@@ -37,7 +37,7 @@ function AddReviewForm(): JSX.Element {
       <div className="reviews__rating-form form__rating">
         {REVIEW_RATING.map((data) => (
           <ReviewStar
-            onFieldChangeHandle={onFieldChangeHandle}
+            onFieldChangeHandle={handleFieldChange}
             value={data.value}
             title={data.title}
             rating={rating}
@@ -51,7 +51,7 @@ function AddReviewForm(): JSX.Element {
         name="comment"
         maxLength={ReviewLength.Max}
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={onFieldChangeHandle}
+        onChange={handleFieldChange}
         value={comment}
         disabled={formActiveState}
       />
