@@ -1,5 +1,6 @@
 import Header from '../header/header';
 import { Helmet } from 'react-helmet-async';
+import Footer from '../footer/footer';
 
 function FavoritesEmpty(): JSX.Element {
   return (
@@ -22,6 +23,7 @@ function FavoritesEmpty(): JSX.Element {
             </section>
           </div>
         </main>
+        <Footer />
       </div>
     </>
   );

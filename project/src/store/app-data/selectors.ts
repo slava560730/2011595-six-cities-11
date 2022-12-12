@@ -1,7 +1,7 @@
 import { State } from '../../types/state';
 import { Offer } from '../../types/offer';
-import { NameSpace } from '../../consts';
-import { Review } from '../../types/review';
+import { MAX_REVIEWS, NameSpace } from '../../consts';
+import { NewReview, Review } from '../../types/review';
 import { sortByDay } from '../../utils';
 import { createSelector } from '@reduxjs/toolkit';
 
@@ -20,7 +20,9 @@ export const getFormActiveState = (state: State): boolean => state[NameSpace.Dat
 export const getCurrentOffer = (state: State): Offer | undefined =>
   state[NameSpace.Data].currentOffer;
 export const getReviews = (state: State): Review[] => state[NameSpace.Data].reviews;
+export const getFormData = (state: State): NewReview => state[NameSpace.Data].formData;
+export const getServerError = (state: State): boolean => state[NameSpace.Data].isServerError;
 
 export const getSortedReviews = createSelector(getReviews, (reviews) =>
-  reviews.slice(-10).sort(sortByDay)
+  reviews.slice(MAX_REVIEWS).sort(sortByDay)
 );

@@ -14,7 +14,6 @@ import { getCurrentCity, getSortedOffers } from '../../store/app-process/selecto
 function Main(): JSX.Element {
   const selectedCity = useAppSelector(getCurrentCity);
   const offersByCity = useAppSelector(getSortedOffers);
-
   const [selectedOffer, setSelectedOffer] = useState<null | number>(NULL_CITY_ID);
 
   return (

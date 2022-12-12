@@ -1,6 +1,6 @@
 import { AppData } from '../../types/state';
-import { NameSpace } from '../../consts';
-import { createSlice } from '@reduxjs/toolkit';
+import { DEFAULT_REVIEW_STATE, NameSpace } from '../../consts';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   fetchCurrentOfferAction,
   fetchFavoriteOffersAction,
@@ -11,23 +11,30 @@ import {
   fetchReviewsAction,
 } from '../api-actions';
 import { updateOffers } from '../../utils';
+import { NewReview } from '../../types/review';
 
 const initialState: AppData = {
   offers: [],
   favoriteOffers: [],
   nearbyOffers: [],
   reviews: [],
+  formData: DEFAULT_REVIEW_STATE,
   currentOffer: undefined,
   isOffersDataLoading: false,
   isPostFavoriteStateStatus: false,
   isOfferDataLoading: false,
+  isServerError: false,
   formActiveState: false,
 };
 
 export const appData = createSlice({
   name: NameSpace.Data,
   initialState,
-  reducers: {},
+  reducers: {
+    changeFormData: (state, action: PayloadAction<NewReview>) => {
+      state.formData = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchOffersAction.pending, (state) => {
@@ -36,16 +43,28 @@ export const appData = createSlice({
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isOffersDataLoading = false;
+        state.isServerError = false;
+      })
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.isServerError = true;
+      })
+      .addCase(fetchCurrentOfferAction.rejected, (state) => {
+        state.isServerError = true;
       })
       .addCase(fetchCurrentOfferAction.pending, (state) => {
         state.isOfferDataLoading = true;
+        state.isServerError = false;
       })
       .addCase(fetchCurrentOfferAction.fulfilled, (state, action) => {
         state.currentOffer = action.payload;
         state.isOfferDataLoading = false;
+        state.isServerError = false;
       })
       .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
+      })
+      .addCase(fetchPostReviewAction.rejected, (state) => {
+        state.formActiveState = false;
       })
       .addCase(fetchPostReviewAction.pending, (state) => {
         state.formActiveState = true;
@@ -53,6 +72,7 @@ export const appData = createSlice({
       .addCase(fetchPostReviewAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
         state.formActiveState = false;
+        state.formData = DEFAULT_REVIEW_STATE;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
@@ -76,3 +96,5 @@ export const appData = createSlice({
       });
   },
 });
+
+export const { changeFormData } = appData.actions;

@@ -4,10 +4,11 @@ import { loginAction } from '../../store/api-actions';
 import React, { FormEvent, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { redirectToRoute } from '../../store/action';
-import { AppRoute, CITIES, MAIN_CITY } from '../../consts';
+import { AppRoute, CITIES, MAIN_CITY, PASSWORD_NOTIFY } from '../../consts';
 import { useAppDispatch } from '../../hooks';
 import { changeSelectedCity } from '../../store/app-process/app-process';
 import { arrayRandElement } from '../../utils';
+import { toast } from 'react-toastify';
 
 function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -18,7 +19,9 @@ function Login(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const passwordRule = /^(?=.*\d)(?=.*[A-Za-z]).{2,}$/;
-
+    if (passwordRef.current !== null && !passwordRef.current.value.match(passwordRule)) {
+      toast.warn(PASSWORD_NOTIFY);
+    }
     if (
       loginRef.current !== null &&
       passwordRef.current !== null &&

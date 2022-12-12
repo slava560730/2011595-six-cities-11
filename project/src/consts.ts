@@ -4,10 +4,12 @@ export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
 export const OPTION_SINGLE = 1;
 export const MAX_IMG = -6;
+export const MAX_REVIEWS = -10;
 export const MAIN_CITY = 'Paris';
 export const NEED_MOUSE_LEAVE = true;
 export const NULL_CITY_ID = null;
 export const SELECT_OPEN = true;
+export const PASSWORD_NOTIFY = 'Password must consist of at least one letter and a number';
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export enum AuthorizationStatus {

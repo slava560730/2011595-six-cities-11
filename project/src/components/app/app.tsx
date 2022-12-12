@@ -18,13 +18,12 @@ import { fetchOffersAction } from '../../store/api-actions';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingState);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
 
   useEffect(() => {
     dispatch(fetchOffersAction());
   }, []);
-
-  const isOffersDataLoading = useAppSelector(getOffersDataLoadingState);
-  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
 
   if (!isAuthChecked || isOffersDataLoading) {
     return <LoadingScreen />;

@@ -1,32 +1,32 @@
-import React, { FormEvent, useState } from 'react';
-import { NewReview } from '../../types/review';
+import React, { FormEvent } from 'react';
 import { fetchPostReviewAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
-import { DEFAULT_REVIEW_STATE, ReviewLength, REVIEW_RATING } from '../../consts';
-import { getFormActiveState } from '../../store/app-data/selectors';
+import { ReviewLength, REVIEW_RATING } from '../../consts';
+import { getFormActiveState, getFormData } from '../../store/app-data/selectors';
 import ReviewStar from '../review-star/review-star';
+import { changeFormData } from '../../store/app-data/app-data';
 
 function AddReviewForm(): JSX.Element {
   const formActiveState = useAppSelector(getFormActiveState);
   const params = useParams();
+
   const id = Number(params.id);
   const dispatch = useAppDispatch();
 
-  const [formData, setFormData] = useState<NewReview>(DEFAULT_REVIEW_STATE);
+  const formData = useAppSelector(getFormData);
   const { comment, rating } = formData;
 
   const handleFieldChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = target;
-    setFormData({ ...formData, [name]: value });
+    dispatch(changeFormData({ ...formData, [name]: value }));
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(fetchPostReviewAction([formData, id]));
-    setFormData(DEFAULT_REVIEW_STATE);
   };
 
   return (
