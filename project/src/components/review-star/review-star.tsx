@@ -8,7 +8,6 @@ type ReviewStarProps = {
 };
 
 function ReviewStar({ value, title, rating, onFieldChangeHandle }: ReviewStarProps): JSX.Element {
-  const handleFieldChange = onFieldChangeHandle;
   return (
     <>
       <input
@@ -17,7 +16,7 @@ function ReviewStar({ value, title, rating, onFieldChangeHandle }: ReviewStarPro
         value={value}
         id={`${value}-stars`}
         type="radio"
-        onChange={handleFieldChange}
+        onChange={onFieldChangeHandle}
         checked={value === Number(rating)}
       />
       <label

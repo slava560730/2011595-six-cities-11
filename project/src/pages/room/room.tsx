@@ -47,16 +47,18 @@ function Room(): JSX.Element {
   const isServerError = useAppSelector(getServerError);
 
   useEffect(() => {
-    dispatch(fetchReviewsAction(id));
-    dispatch(fetchCurrentOfferAction(id));
-    dispatch(fetchNearbyOffersAction(id));
+    if (id !== undefined) {
+      dispatch(fetchReviewsAction(id));
+      dispatch(fetchCurrentOfferAction(id));
+      dispatch(fetchNearbyOffersAction(id));
+    }
   }, [id]);
 
-  if (isServerError || !currentOffer) {
+  if (isServerError) {
     return <NotFoundScreen />;
   }
 
-  if (isOfferDataLoading) {
+  if (isOfferDataLoading || !currentOffer) {
     return <LoadingScreen />;
   }
 
