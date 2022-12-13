@@ -28,8 +28,10 @@ import {
   getCurrentOffer,
   getNearbyOffers,
   getOfferDataLoadingState,
+  getServerError,
 } from '../../store/app-data/selectors';
 import { getAuthLoggedStatus } from '../../store/user-process/selectors';
+import { firstLetterToUpperCase } from '../../utils';
 
 function Room(): JSX.Element {
   const params = useParams();
@@ -42,19 +44,22 @@ function Room(): JSX.Element {
 
   const [selectedOffer, setSelectedOffer] = useState<null | number>(id);
   const currentOffer = useAppSelector(getCurrentOffer);
+  const isServerError = useAppSelector(getServerError);
 
   useEffect(() => {
-    dispatch(fetchReviewsAction(id));
-    dispatch(fetchCurrentOfferAction(id));
-    dispatch(fetchNearbyOffersAction(id));
+    if (id !== undefined) {
+      dispatch(fetchReviewsAction(id));
+      dispatch(fetchCurrentOfferAction(id));
+      dispatch(fetchNearbyOffersAction(id));
+    }
   }, [id]);
 
-  if (isOfferDataLoading) {
-    return <LoadingScreen />;
+  if (isServerError) {
+    return <NotFoundScreen />;
   }
 
-  if (!currentOffer) {
-    return <NotFoundScreen />;
+  if (isOfferDataLoading || !currentOffer) {
+    return <LoadingScreen />;
   }
 
   const {
@@ -131,7 +136,9 @@ function Room(): JSX.Element {
                 <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">
-                <li className="property__feature property__feature--entire">{type}</li>
+                <li className="property__feature property__feature--entire">
+                  {firstLetterToUpperCase(type)}
+                </li>
                 <li className="property__feature property__feature--bedrooms">
                   {bedrooms}
                   {bedrooms === OPTION_SINGLE ? ' Bedroom' : ' Bedrooms'}

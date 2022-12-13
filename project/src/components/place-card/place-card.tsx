@@ -6,6 +6,7 @@ import { AppRoute, FavoriteState, NULL_CITY_ID } from '../../consts';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchPostFavoriteStateAction } from '../../store/api-actions';
 import { getAuthLoggedStatus } from '../../store/user-process/selectors';
+import { firstLetterToUpperCase } from '../../utils';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -92,7 +93,7 @@ function PlaceCard({
         <h2 className="place-card__name">
           <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{firstLetterToUpperCase(type)}</p>
       </div>
     </article>
   );

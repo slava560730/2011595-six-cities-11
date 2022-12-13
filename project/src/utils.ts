@@ -15,6 +15,8 @@ export function arrayRandElement(arr: string[]) {
   return arr[rand];
 }
 
+export const firstLetterToUpperCase = (letter: string) => letter[0].toUpperCase() + letter.slice(1);
+
 export const updateOffers = (offers: Offer[], updatedOffer: Offer | null) =>
   offers.map((item) => {
     if (updatedOffer === null || item.id !== updatedOffer.id) {

@@ -1,7 +1,7 @@
 import { store } from '../store';
 import { AuthorizationStatus } from '../consts';
 import { Offer } from './offer';
-import { Review } from './review';
+import { NewReview, Review } from './review';
 
 export type State = ReturnType<typeof store.getState>;
 
@@ -24,9 +24,11 @@ export type AppData = {
   favoriteOffers: Offer[];
   nearbyOffers: Offer[];
   reviews: Review[];
+  formData: NewReview;
   currentOffer: Offer | undefined;
   isOffersDataLoading: boolean;
   isOfferDataLoading: boolean;
   isPostFavoriteStateStatus: boolean;
   formActiveState: boolean;
+  isServerError: boolean;
 };

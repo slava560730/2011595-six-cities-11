@@ -1,11 +1,26 @@
 import { Offer } from '../../types/offer';
 import { Link } from 'react-router-dom';
+import cn from 'classnames';
+import { useAppDispatch } from '../../hooks';
+import { fetchPostFavoriteStateAction } from '../../store/api-actions';
+import { FavoriteState } from '../../consts';
 
 type FavoriteCardProps = {
   offer: Offer;
 };
 
 function FavoriteCard({ offer }: FavoriteCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const handleFavoriteButtonClick = () => {
+    dispatch(
+      fetchPostFavoriteStateAction([
+        offer.isFavorite ? FavoriteState.NotFavorite : FavoriteState.Favorite,
+        offer.id,
+      ])
+    );
+  };
+
   return (
     <article className="favorites__card place-card">
       {offer.isPremium && (
@@ -31,7 +46,10 @@ function FavoriteCard({ offer }: FavoriteCardProps): JSX.Element {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className="place-card__bookmark-button place-card__bookmark-button--active button"
+            className={cn('place-card__bookmark-button button', {
+              'place-card__bookmark-button--active': offer.isFavorite,
+            })}
+            onClick={handleFavoriteButtonClick}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
