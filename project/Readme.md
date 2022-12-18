@@ -64,7 +64,7 @@ npm run lint
 ### Сборка проекта
 
 ```bash
-npm run docs
+npm run root
 ```
 
 Запуск сборки приложения.
