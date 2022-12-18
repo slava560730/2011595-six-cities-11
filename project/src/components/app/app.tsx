@@ -33,17 +33,17 @@ function App(): JSX.Element {
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
         <Routes>
-          <Route path={AppRoute.Main} element={<Main />} />
-          <Route path={AppRoute.Login} element={<Login />} />
+          <Route path={"/2011595-six-cities-11" + AppRoute.Main} element={<Main />} />
+          <Route path={"/2011595-six-cities-11" + AppRoute.Login} element={<Login />} />
           <Route
-            path={AppRoute.Favorites}
+            path={"/2011595-six-cities-11" + AppRoute.Favorites}
             element={
               <PrivateRoute>
                 <Favorites />
               </PrivateRoute>
             }
           />
-          <Route path={AppRoute.Room} element={<Room />} />
+          <Route path={"/2011595-six-cities-11" + AppRoute.Room} element={<Room />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Routes>
       </HistoryRouter>
