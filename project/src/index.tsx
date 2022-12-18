@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { checkAuthAction } from './store/api-actions';
 
 store.dispatch(checkAuthAction());
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(document.getElementById('docs') as HTMLElement);
 
 root.render(
   <React.StrictMode>
