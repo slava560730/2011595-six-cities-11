@@ -1,7 +1,7 @@
 import { City } from './types/offer';
 
-export const URL_MARKER_DEFAULT = '../../img/pin.svg';
-export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
+export const URL_MARKER_DEFAULT = './img/pin.svg';
+export const URL_MARKER_CURRENT = './img/pin-active.svg';
 export const OPTION_SINGLE = 1;
 export const MAX_IMG = -6;
 export const MAX_REVIEWS = -10;
