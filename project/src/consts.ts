@@ -19,7 +19,7 @@ export enum AuthorizationStatus {
 }
 
 export enum AppRoute {
-  Main = '/2011595-six-cities-11/',
+  Main = '/',
   Login = '/login',
   Favorites = '/favorites',
   Room = '/offer/:id',
