@@ -31,7 +31,7 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <HistoryRouter basename={"https://slava560730.github.io/2011595-six-cities-11/"} history={browserHistory}>
+      <HistoryRouter basename={"/2011595-six-cities-11/"} history={browserHistory}>
         <Routes>
           <Route path={AppRoute.Main} element={<Main />} />
           <Route path={AppRoute.Login} element={<Login />} />
