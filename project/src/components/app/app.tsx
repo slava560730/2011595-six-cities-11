@@ -1,4 +1,4 @@
-import {Route, Router, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import Main from '../../pages/main/main';
 import { AppRoute } from '../../consts';
 import Login from '../../pages/login/login';
@@ -31,19 +31,19 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <HistoryRouter history={browserHistory}>
+      <HistoryRouter basename={"https://slava560730.github.io/2011595-six-cities-11/"} history={browserHistory}>
         <Routes>
-          <Route path={"/2011595-six-cities-11" + AppRoute.Main} element={<Main />} />
-          <Route path={"/2011595-six-cities-11" + AppRoute.Login} element={<Login />} />
+          <Route path={AppRoute.Main} element={<Main />} />
+          <Route path={AppRoute.Login} element={<Login />} />
           <Route
-            path={"/2011595-six-cities-11" + AppRoute.Favorites}
+            path={AppRoute.Favorites}
             element={
               <PrivateRoute>
                 <Favorites />
               </PrivateRoute>
             }
           />
-          <Route path={"/2011595-six-cities-11" + AppRoute.Room} element={<Room />} />
+          <Route path={AppRoute.Room} element={<Room />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Routes>
       </HistoryRouter>
