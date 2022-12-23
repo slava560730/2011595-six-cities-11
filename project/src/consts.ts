@@ -23,6 +23,7 @@ export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Room = '/offer/:id',
+  Redirect = '/2011595-six-cities-11/',
 }
 
 export enum APIRoute {
