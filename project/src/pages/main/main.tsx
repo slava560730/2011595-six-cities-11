@@ -20,7 +20,6 @@ function Main(): JSX.Element {
     <div className="page page--gray page--main">
       <Helmet>
         <title>6 cities</title>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
       </Helmet>
       <Header />
       <main
